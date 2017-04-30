@@ -10,20 +10,21 @@
 	<link type="text/css" href="../public/css/bootstrap-grid.min.css" rel="stylesheet">
 	<link type="text/css" href="../public/css/bootstrap-reboot.css" rel="stylesheet">
 	<link type="text/css" href="../public/css/bootstrap-reboot.min.css" rel="stylesheet">
-	<script src="../public/js/bootstrap.js"></script>
-	<script src="../public/js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </head>
+
 <body>
 	<div class="contener-div">
 		<header>
-			<a href="#">
+			<a href="index_learning.php">
 				<img id="header-logo" src="../public/image/logo.PNG">
 			</a>
 			<nav class="site-nav">
-				<form id="signin" class="navbar-form navbar-right" role="form" method="post">
+				<form id="sighout" class="navbar-form navbar-right" role="form" method="post">
 					<ul>	
                         <li>
-                        	<button type="submit" class="btn btn-success" name='signOut'>Sign Out</button>
+                        	<button type="submit" class="btn btn-success" name="signOut">Sign Out</button>
 						</li>
 					</ul>
 				</form>
@@ -33,35 +34,11 @@
 			<div id="info1-div"></div>
 		</section>
 		<section class="info1-sec">
-			<div id="info1-left-div">
-				<div id="info1-inside-left-div" class="rounded"> 
-					<div class = "row">			
-						<div class="thumb-div rounded">
-							<a href="#">
-								<img class="thumb-inside-div rounded" src="../public/image/vn-flag.png">
-							</a>
-							<div id="text-inside-div" class="rounded">
-								<h2 id="text-inside-h2">VIỆT NAM</h2>
-							</div>
-						</div>											
-						<div class="thumb-div rounded">
-							<a href="#">
-								<img class="thumb-inside-div rounded" src="../public/image/eng-flag.png">
-							</a>
-							<div id="text-inside-div" class="rounded">
-								<h2 id="text-inside-h2">ENGLISH</h2>
-							</div>
-						</div>								
-					</div>
-				</div>
-			</div>
-			<div id="info1-right-div">
-				<div id="info1-inside-right-div" class="rounded" name="user">
-					
-				</div>
-			</div>
+			<?php require_once 'routes_learning.php'; ?>
 		</section>
 		<section class="footer-sec">
+			<p>[Đồ án môn Phát Triển Ứng Dụng Web - Website học tiếng Anh online]</p>
+			<p>[Trương Quốc Cường - 51403013 | Trần Trung Tín - 51403320]</p>
 		</section>
 	</div>
 </body>

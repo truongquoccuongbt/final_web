@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Home</title>
+<title>Index</title>
 	<link type="text/css" href="public/css/custom-index.css" rel="stylesheet">
 	<link type="text/css" href="public/css/bootstrap-grid.css" rel="stylesheet">
 	<link type="text/css" href="public/css/bootstrap.min.css" rel="stylesheet">
@@ -10,8 +10,8 @@
 	<link type="text/css" href="public/css/bootstrap-grid.min.css" rel="stylesheet">
 	<link type="text/css" href="public/css/bootstrap-reboot.css" rel="stylesheet">
 	<link type="text/css" href="public/css/bootstrap-reboot.min.css" rel="stylesheet">
-	<script src="public/js/bootstrap.js"></script>
-	<script src="public/js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </head>
 <?php require_once 'routes_index.php'; ?>
 <body>	
@@ -21,7 +21,7 @@
 				<img id="header-logo" src="public/image/logo.PNG">
 			</a>
 			<nav class="site-nav">
-				<form id="signin" class="navbar-form navbar-right" role="form" method="post" >
+				<form id="signin" class="navbar-form navbar-right" role="form" method="post">
 					<ul>	
 						<li>
                            <div class="input-group">
@@ -37,10 +37,7 @@
                         	<button type="submit" class="btn btn-primary" name="login">Login</button>
 						</li>
 						<li>
-							<button type="submit" class="btn btn-warning" name="signup">Sign Up</button>
-						</li>
-						<li>
-							<button type="submit" class="btn btn-success" name="forgot">Forgot Password ?</button>	
+							<button type="submit" class="btn btn-warning">Sign Up</button>
 						</li>
 					</ul>
 				</form>
@@ -51,7 +48,7 @@
 				<div id="info1-blank-div">&nbsp;</div>
 				<h1 id="info1-title-h1">Learn a language for free. Forever.</h1>
 				<div id="info1-start-div">
-					<p><a class="btn btn-primary btn-lg" href="#" role="button" type="submit" name="get_started">Get Started</a></p>
+					<p><a class="btn btn-primary btn-lg" href="#" role="button">Get Started</a></p>
 				</div>
 			</div>
 		</section>
@@ -91,6 +88,8 @@
 				<div id="info1-start-div">
 					<p><a class="btn btn-primary btn-lg" href="#" role="button">Get Started</a></p>
 				</div>
+				<p>[Đồ án môn Phát Triển Ứng Dụng Web - Website học tiếng Anh online]</p>
+				<p>[Trương Quốc Cường - 51403013 | Trần Trung Tín - 51403320]</p>
 		</section>
 	</div>
 	</div>

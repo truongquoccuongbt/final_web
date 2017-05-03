@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <title>Learning</title>
-	<link type="text/css" href="../public/css/custom-learning.css" rel="stylesheet">
+	
 	<link type="text/css" href="../public/css/bootstrap-grid.css" rel="stylesheet">
 	<link type="text/css" href="../public/css/bootstrap.min.css" rel="stylesheet">
 	<link type="text/css" href="../public/css/bootstrap.css" rel="stylesheet">
 	<link type="text/css" href="../public/css/bootstrap-grid.min.css" rel="stylesheet">
 	<link type="text/css" href="../public/css/bootstrap-reboot.css" rel="stylesheet">
 	<link type="text/css" href="../public/css/bootstrap-reboot.min.css" rel="stylesheet">
-	<script src="js/bootstrap.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="../public/js/bootstrap.js"></script>
+	<script src="../public/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -29,9 +29,9 @@
 					</ul>
 				</form>
 			</nav>
-		</header>	
+		</header>
+		
 		<section class="header-sec">
-			<div id="info1-div"></div>
 		</section>
 		<section class="info1-sec">
 			<?php require_once 'routes_learning.php'; ?>

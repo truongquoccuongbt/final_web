@@ -27,7 +27,6 @@
 	 if (isset($_POST['signOut'])) {
 	 	$controller = "learning";
 	 	$action = "SignOut";
-	 	echo $action;
 	 }
 	 
 	 require_once 'learning.php';

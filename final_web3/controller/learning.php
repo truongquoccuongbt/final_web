@@ -267,6 +267,7 @@
 			self::ChangeQuestion();
 			self::ClearnForm();
 			self::ChangeForm();
+			self::CheckAnswerWri();
 		}
 
 		private function StartQuestionChoi ($listQuesChoi, $listQuesWri) {
@@ -351,12 +352,25 @@
 			echo "
 				<script>
 					function CheckQuestion () {
-						
+						var img = document.getElementById('answer-inside-img');
 
 						if (checkChangeForm == true) {
 							if (document.getElementById('answer').value == '') {
 								alert('Write answer');
 								return;
+							}
+							else {
+								if (CheckAnswerWri() == true) {
+									img.setAttribute('src','../public/image/true.PNG');
+									document.getElementById('isTrue').innerHTML = 'TRUE';
+									document.getElementById('answer').disabled = true;
+								}
+								else {
+									img.setAttribute('src','../public/image/false.PNG');
+									document.getElementById('isTrue').innerHTML = 'FALSE';
+									document.getElementById('answer').disabled = true;
+								}
+								document.getElementById('skip-button').disabled = false;
 							}
 						}
 						else {
@@ -364,26 +378,26 @@
 								alert('Choose an answser');
 								return;
 							}
-						}
-						document.getElementById('skip-button').disabled = false;
-						var radio = document.getElementsByName('answser');
-						var img = document.getElementById('answer-inside-img');
 
-						for  (var i = 0; i < radio.length; i++) {
-							radio[i].disabled = true;
-						}
+							document.getElementById('skip-button').disabled = false;
+							var radio = document.getElementsByName('answser');
+
+							for  (var i = 0; i < radio.length; i++) {
+								radio[i].disabled = true;
+							}
 		
-						for (var i = 0;i < radio.length; i++) {
-							if (radio[i].checked) {
-								if (radio[i].value == listQuesChoi[index]['answer']) {
-									img.setAttribute('src','../public/image/true.PNG');
-									document.getElementById('isTrue').innerHTML = 'TRUE';
-									return;
+							for (var i = 0;i < radio.length; i++) {
+								if (radio[i].checked) {
+									if (radio[i].value == listQuesChoi[index]['answer']) {
+										img.setAttribute('src','../public/image/true.PNG');
+										document.getElementById('isTrue').innerHTML = 'TRUE';
+										return;
+									}
 								}
 							}
+							img.setAttribute('src','../public/image/false.PNG');
+							document.getElementById('isTrue').innerHTML = 'FALSE';
 						}
-						img.setAttribute('src','../public/image/false.PNG');
-						document.getElementById('isTrue').innerHTML = 'FALSE';
 					}
 				</script>
 			";
@@ -394,23 +408,32 @@
 				<script>
 				function ChangeQuestion() {
 					index++;
-					if (index >= listQuesChoi.length) {
-						index = 0;
-						ClearnForm();
-						ChangeForm();
-						checkChangeForm = true;
-						return;
-					}
+					if (checkChangeForm == false) {
+						if (index >= listQuesChoi.length) {
+							index = 0;
+							ClearnForm();
+							ChangeForm();
+							checkChangeForm = true;
+							return;
+						}
 
-					if (checkChangeForm == true) {
-						
+						document.getElementById('skip-button').disabled = true;
+						document.getElementById('a1').innerHTML = listQuesChoi[index]['choice_1'];
+						document.getElementById('a2').innerHTML = listQuesChoi[index]['choice_2'];
+						document.getElementById('a3').innerHTML = listQuesChoi[index]['choice_3'];
+						document.getElementById('title').innerHTML = listQuesChoi[index]['content_question'];
+						Clear();
 					}
+					else {
+						document.getElementById('ques').innerHTML = listQuesWri[index]['content_question'];
+						document.getElementById('answer').disabled = false;
+						document.getElementById('answer').value = '';
+						document.getElementById('skip-button').disabled = true;
 
-					document.getElementById('a1').innerHTML = listQuesChoi[index]['choice_1'];
-					document.getElementById('a2').innerHTML = listQuesChoi[index]['choice_2'];
-					document.getElementById('a3').innerHTML = listQuesChoi[index]['choice_3'];
-					document.getElementById('title').innerHTML = listQuesChoi[index]['content_question'];
-					Clear();
+						var img = document.getElementById('answer-inside-img');
+						img.removeAttribute('src');
+						document.getElementById('isTrue').innerHTML = '';
+					}
 				}
 
 				function Clear() {
@@ -422,7 +445,7 @@
 
 					var img = document.getElementById('answer-inside-img');
 					img.removeAttribute('src');
-					document.getElementById('isTrue').inner = '';
+					document.getElementById('isTrue').innerHTML = '';
 				}
 
 				function CheckRadio () {
@@ -477,6 +500,18 @@
 						row.appendChild(div2);
 						row.appendChild(link);
 
+						var divAns = document.createElement('div');
+						divAns.setAttribute('id','answer-inside-div');
+						var img = document.createElement('img');
+						img.setAttribute('id','answer-inside-img');
+						var span = document.createElement('span');
+						span.setAttribute('id','isTrue');
+						divAns.appendChild(img);
+						divAns.appendChild(span);
+
+						row.appendChild(divAns);
+						
+						document.getElementById('skip-button').disabled = true;
 						document.getElementById('title').innerHTML = 'Translate';
 					}
 				</script>
@@ -488,6 +523,22 @@
 				function LoadQuestionWri() {
 
 				}
+			";
+		}
+
+		private function CheckAnswerWri () {
+			echo "
+				<script>
+					function CheckAnswerWri() {
+						var result = listQuesWri[index]['answer'];
+						var ans = document.getElementById('answer').value;
+						
+						if (result == ans) {
+							return true;
+						}
+						return false;
+					}
+				</script>
 			";
 		}
 

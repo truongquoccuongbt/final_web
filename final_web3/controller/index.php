@@ -23,9 +23,12 @@
 				exit();
 			}
 			else {
+				$_SESSION = array();
+				session_destroy();
 				echo 
 				" <script>
 					alert('Username or password is wrong!! Please check again');
+					window.Location='http://localhost/final_web3';
 				</script>
 				";
 			}		

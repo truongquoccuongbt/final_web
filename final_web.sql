@@ -2,10 +2,10 @@
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 28, 2017 at 06:07 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 04, 2017 lúc 09:07 SA
+-- Phiên bản máy phục vụ: 10.1.21-MariaDB
+-- Phiên bản PHP: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `final_web`
+-- Cơ sở dữ liệu: `final_web`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chapters`
+-- Cấu trúc bảng cho bảng `chapters`
 --
 
 CREATE TABLE `chapters` (
@@ -33,7 +33,7 @@ CREATE TABLE `chapters` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `chapters`
+-- Đang đổ dữ liệu cho bảng `chapters`
 --
 
 INSERT INTO `chapters` (`id_chapter`, `id_course`, `name_chapter`) VALUES
@@ -44,7 +44,7 @@ INSERT INTO `chapters` (`id_chapter`, `id_course`, `name_chapter`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `courses`
+-- Cấu trúc bảng cho bảng `courses`
 --
 
 CREATE TABLE `courses` (
@@ -53,7 +53,7 @@ CREATE TABLE `courses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `courses`
+-- Đang đổ dữ liệu cho bảng `courses`
 --
 
 INSERT INTO `courses` (`id_course`, `name_course`) VALUES
@@ -63,7 +63,7 @@ INSERT INTO `courses` (`id_course`, `name_course`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `learning`
+-- Cấu trúc bảng cho bảng `learning`
 --
 
 CREATE TABLE `learning` (
@@ -73,7 +73,7 @@ CREATE TABLE `learning` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `learning`
+-- Đang đổ dữ liệu cho bảng `learning`
 --
 
 INSERT INTO `learning` (`id_user`, `id_course`, `learned_lesson`) VALUES
@@ -83,7 +83,7 @@ INSERT INTO `learning` (`id_user`, `id_course`, `learned_lesson`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lessons`
+-- Cấu trúc bảng cho bảng `lessons`
 --
 
 CREATE TABLE `lessons` (
@@ -93,7 +93,7 @@ CREATE TABLE `lessons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `lessons`
+-- Đang đổ dữ liệu cho bảng `lessons`
 --
 
 INSERT INTO `lessons` (`id_lesson`, `id_chapter`, `content_lesson`) VALUES
@@ -106,7 +106,7 @@ INSERT INTO `lessons` (`id_lesson`, `id_chapter`, `content_lesson`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Cấu trúc bảng cho bảng `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -118,7 +118,7 @@ CREATE TABLE `migrations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `progress`
+-- Cấu trúc bảng cho bảng `progress`
 --
 
 CREATE TABLE `progress` (
@@ -128,7 +128,7 @@ CREATE TABLE `progress` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `progress`
+-- Đang đổ dữ liệu cho bảng `progress`
 --
 
 INSERT INTO `progress` (`date`, `id_user`, `score`) VALUES
@@ -138,7 +138,7 @@ INSERT INTO `progress` (`date`, `id_user`, `score`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question_choices`
+-- Cấu trúc bảng cho bảng `question_choices`
 --
 
 CREATE TABLE `question_choices` (
@@ -155,24 +155,24 @@ CREATE TABLE `question_choices` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `question_choices`
+-- Đang đổ dữ liệu cho bảng `question_choices`
 --
 
 INSERT INTO `question_choices` (`id_question_choice`, `id_lesson`, `content_question`, `choice_1`, `choice_2`, `choice_3`, `picture_1`, `picture_2`, `picture_3`, `answer`) VALUES
-('QC001', 'L0001', 'Select translation of Man', 'nước', 'người đàn ông', 'bé gái', 'none', 'none', 'none', '2'),
-('QC002', 'L0001', 'Select translation of Woman', 'phụ nữ', 'bánh mì', 'nước ép', 'none', 'none', 'none', '1'),
-('QC003', 'L0002', 'Select translation of Bread', 'bánh mì', 'nước ép', 'đứa trẻ', 'none', 'none', 'none', '1'),
-('QC004', 'L0002', 'Select translation of Apple', 'cậu bé', 'người đàn ông', 'táo', 'none', 'none', 'none', '3'),
-('QC005', 'L0003', 'Select translation of Fish', 'ô', 'cá', 'gà', 'none', 'none', 'none', '2'),
-('QC006', 'L0003', 'Select translation of Chicken', 'cá', 'gà', 'ô', 'none', 'none', 'none', '2'),
-('QC007', 'L0004', 'Chọn nghĩa của từ Phụ Nữ', 'wonman', 'apple', 'man', 'none', 'none', 'none', '1'),
-('QC008', 'L0004', 'Chọn nghĩa của từ Cô Gái', 'apple', 'girl', 'woman', 'none', 'none', 'none', '2'),
-('QC009', 'L0005', 'Chọn nghĩa của từ Táo', 'apple', 'woman', 'man', 'none', 'none', 'none', '1');
+('QC001', 'L0001', 'Select translation of Man', 'nước', 'người đàn ông', 'bé gái', '../public/image/l1_q1_a1.PNG', '../public/image/l1_q1_a2.PNG\r\n', '../public/image/l1_q1_a3.PNG', '2'),
+('QC002', 'L0001', 'Select translation of Woman', 'phụ nữ', 'bánh mì', 'nước ép', '../public/image/l1_q2_a1.PNG\r\n', '../public/image/l1_q2_a2.PNG\r\n', '../public/image/l1_q2_a3.PNG\r\n', '1'),
+('QC003', 'L0002', 'Select translation of Bread', 'bánh mì', 'nước ép', 'đứa trẻ', '../public/image/l2_q1_a1.PNG', '../public/image/l2_q1_a2.PNG', '../public/image/l2_q1_a3.PNG', '1'),
+('QC004', 'L0002', 'Select translation of Apple', 'cậu bé', 'người đàn ông', 'táo', '../public/image/l2_q2_a1.PNG\r\n', '../public/image/l2_q2_a2.PNG\r\n', '../public/image/l2_q2_a3.PNG', '3'),
+('QC005', 'L0003', 'Select translation of Fish', 'ô', 'cá', 'gà', '../public/image/l3_q1_a1.PNG\r\n', '../public/image/l3_q1_a2.PNG\r\n', '../public/image/l3_q1_a3.PNG', '2'),
+('QC006', 'L0003', 'Select translation of Chicken', 'cá', 'gà', 'ô', '../public/image/l3_q1_a2.PNG', '../public/image/l3_q1_a3.PNG', '../public/image/l3_q1_a1.PNG', '2'),
+('QC007', 'L0004', 'Chọn nghĩa của từ Phụ Nữ', 'wonman', 'apple', 'man', '../public/image/l1_q2_a1.PNG', '../public/image/l2_q2_a3.PNG', '../public/image/l2_q2_a2.PNG', '1'),
+('QC008', 'L0004', 'Chọn nghĩa của từ Cô Gái', 'apple', 'girl', 'woman', '../public/image/l2_q2_a3.PNG', '../public/image/l1_q1_a3.PNG', '../public/image/l1_q2_a1.PNG', '2'),
+('QC009', 'L0005', 'Chọn nghĩa của từ Táo', 'apple', 'woman', 'man', '../public/image/l2_q2_a3.PNG', '../public/image/l1_q2_a1.PNG', '../public/image/l2_q2_a2.PNG', '1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question_writes`
+-- Cấu trúc bảng cho bảng `question_writes`
 --
 
 CREATE TABLE `question_writes` (
@@ -183,7 +183,7 @@ CREATE TABLE `question_writes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `question_writes`
+-- Đang đổ dữ liệu cho bảng `question_writes`
 --
 
 INSERT INTO `question_writes` (`id_question_write`, `id_lesson`, `content_question`, `answer`) VALUES
@@ -203,7 +203,7 @@ INSERT INTO `question_writes` (`id_question_write`, `id_lesson`, `content_questi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -216,7 +216,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id_user`, `password`, `email`, `first_name`, `last_name`, `total_score`) VALUES
@@ -225,115 +225,115 @@ INSERT INTO `users` (`id_user`, `password`, `email`, `first_name`, `last_name`, 
 ('trungtin', 'tin123', 'tin123@gmail.com', 'Tín', 'Trần', 100);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `chapters`
+-- Chỉ mục cho bảng `chapters`
 --
 ALTER TABLE `chapters`
   ADD PRIMARY KEY (`id_chapter`),
   ADD KEY `FK_chapter_courses` (`id_course`);
 
 --
--- Indexes for table `courses`
+-- Chỉ mục cho bảng `courses`
 --
 ALTER TABLE `courses`
   ADD PRIMARY KEY (`id_course`);
 
 --
--- Indexes for table `learning`
+-- Chỉ mục cho bảng `learning`
 --
 ALTER TABLE `learning`
   ADD PRIMARY KEY (`id_user`,`id_course`),
   ADD KEY `FK_learning_course` (`id_course`);
 
 --
--- Indexes for table `lessons`
+-- Chỉ mục cho bảng `lessons`
 --
 ALTER TABLE `lessons`
   ADD PRIMARY KEY (`id_lesson`),
   ADD KEY `FK_lessons_chapters` (`id_chapter`);
 
 --
--- Indexes for table `migrations`
+-- Chỉ mục cho bảng `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `progress`
+-- Chỉ mục cho bảng `progress`
 --
 ALTER TABLE `progress`
   ADD PRIMARY KEY (`date`,`id_user`),
   ADD KEY `FK_progress_users` (`id_user`);
 
 --
--- Indexes for table `question_choices`
+-- Chỉ mục cho bảng `question_choices`
 --
 ALTER TABLE `question_choices`
   ADD PRIMARY KEY (`id_question_choice`),
   ADD KEY `FK_qschoises_lessons` (`id_lesson`);
 
 --
--- Indexes for table `question_writes`
+-- Chỉ mục cho bảng `question_writes`
 --
 ALTER TABLE `question_writes`
   ADD PRIMARY KEY (`id_question_write`),
   ADD KEY `FK_qswrites_lessons` (`id_lesson`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `chapters`
+-- Các ràng buộc cho bảng `chapters`
 --
 ALTER TABLE `chapters`
   ADD CONSTRAINT `FK_chapter_courses` FOREIGN KEY (`id_course`) REFERENCES `courses` (`id_course`);
 
 --
--- Constraints for table `learning`
+-- Các ràng buộc cho bảng `learning`
 --
 ALTER TABLE `learning`
   ADD CONSTRAINT `FK_learning_course` FOREIGN KEY (`id_course`) REFERENCES `courses` (`id_course`),
   ADD CONSTRAINT `FK_learning_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 
 --
--- Constraints for table `lessons`
+-- Các ràng buộc cho bảng `lessons`
 --
 ALTER TABLE `lessons`
   ADD CONSTRAINT `FK_lessons_chapters` FOREIGN KEY (`id_chapter`) REFERENCES `chapters` (`id_chapter`);
 
 --
--- Constraints for table `progress`
+-- Các ràng buộc cho bảng `progress`
 --
 ALTER TABLE `progress`
   ADD CONSTRAINT `FK_progress_users` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 
 --
--- Constraints for table `question_choices`
+-- Các ràng buộc cho bảng `question_choices`
 --
 ALTER TABLE `question_choices`
   ADD CONSTRAINT `FK_qschoises_lessons` FOREIGN KEY (`id_lesson`) REFERENCES `lessons` (`id_lesson`);
 
 --
--- Constraints for table `question_writes`
+-- Các ràng buộc cho bảng `question_writes`
 --
 ALTER TABLE `question_writes`
   ADD CONSTRAINT `FK_qswrites_lessons` FOREIGN KEY (`id_lesson`) REFERENCES `lessons` (`id_lesson`);

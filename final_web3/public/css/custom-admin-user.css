@@ -1,24 +1,16 @@
-/* FOR COURSE LIST */
-
-.course-ul {
-	list-style-type: none;
-	margin: 0;
-	text-align: right;
-}
-
-.course-li {
-	display: inline-block;
-	margin-bottom: 0;
-	margin-left: 1.5em;
-}
-
-
 /* FOR BUTTON */
 .btn {
 	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
 	font-weight: bold !important;
 }
 
+/*********************************/
+
+/* FOR TABLE */
+
+tr {
+	font-size: 20px;
+}
 /*********************************/
 
 /* FOR HEADER */
@@ -72,97 +64,35 @@ header {
 	padding-right: 10%;
 }
 
-#info1-div {
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	background-color: antiquewhite;
-}
-
 /******************************************************/
 
 
 /* 2nd SECTION */
 
-.info1-sec {
-	height: 600px;	
-	padding-left: 15%;
-	padding-right: 15%;	
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#question-inside-div {
-	background-color: whitesmoke;
-	width: 100%;
-	height: 85%;
-	text-align: left;
-	padding-top: 20px;
-	padding-left: 10%;
-	padding-right: 10%;
-}
-
-#button-inside-div {
-	background-color: yellowgreen;
-	height: 15%;
-	width: 100%;
-	padding-top: 25px;
-}
-
-#skip-button {
-	float: left;
-	margin-left: 20px;
-}
-
-#check-button {
-	float: right;
-	margin-right: 20px;
-}
-
-
-.thumb-div {
-	width: 350px;
-	height: 300px;
-	background-size: cover;
-	padding: 10px 10px 10px 10px;
-	background-color: rgba(255,255,255,1.00);
-	margin-left: 20px;
-	border: solid rgba(121,121,121,1.00);
-}
-
-.thumb-inside-div {
-	background-size: auto;
-	width: 100%;
-	height: 230px;
-}
-
 #chapter-inside-div {
+	background-color: rgba(255,255,255,0.69);
 	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
 	font-size: 40px;
 	padding-left: 10px;
 	height: 65px;
 	margin-bottom: 20px;
-	background-color: rgba(255,255,255,0.75);
 }
 
-.radio-inside-div {
-	padding-top: 15px;
-	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
-	font-size: 20px
+
+.info1-sec {
+	height: auto;	
+	padding-left: 10%;
+	padding-right: 10%;	
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
-#answer-inside-div {
-	margin-left: 40px;
-	font-size: 30px;
-	
-}
-
-#ques, #answer {
-	font-size: 30px;
-	height: 100%;
+#info1-div {
+	background-color: yellowgreen;
 	width: 100%;
+	height: 100%;
+	padding: 10px 10px 10px 10px;
 }
-
 
 /* FOR FOOTER */
 

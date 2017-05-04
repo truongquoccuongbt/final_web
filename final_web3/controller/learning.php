@@ -260,26 +260,36 @@
 		public function StartQuestion () {
 			$listQuesChoi = QuestionChoice::GetQuestionChoiceByIdLesson($_SESSION['idLesson']);
 			$listQuesWri = QuestionWrite::GetQuestionWriteByIdLesson($_SESSION['idLesson']);
-			$lengthOfListQuesChoi = sizeof($listQuesChoi);
-			$lengthOfListQuesWri = sizeof($listQuesWri);
 
+			
+			self::StartQuestionChoi($listQuesChoi, $listQuesWri);
+			self::CheckQuestion();
+			self::ChangeQuestion();
+			self::ClearnForm();
+			self::ChangeForm();
+		}
+
+		private function StartQuestionChoi ($listQuesChoi, $listQuesWri) {
 			echo "<script> var listQuesChoi=".json_encode($listQuesChoi).";";
 			echo "var listQuesWri=".json_encode($listQuesWri).";";
 			// echo "for (i in listQuesChoi) {
-			// 		document.write(listQuesChoi[i]['picture_1']);
+			// 		document.write(listQuesWri[i]['id_question_write']);
 			//  	}";
-			echo "var index = 0;var pic1 = 'picture_1'; var pic2 = 'picture_2'; var pic3 = 'picture_3';
+			echo "var index = 0;var pic1 = 'picture_1'; var pic2 = 'picture_2'; var pic3 = 'picture_3'; var lengthOfQuesChoi = listQuesChoi.length;
+				var lengthOfQuesWri = listQuesWri.length;
+				var checkChangeForm = false;
 			</script>";
 
 
 			echo "
-				<link type='text/css' href='../public/css/custom-learning-question.css' rel='stylesheet'>
+				
 				<div id='info1-div' class='rounded'>
 					<div id='question-inside-div'> 
 						<div id='chapter-inside-div' class='rounded'>
 							<p id='title'><script>document.write(listQuesChoi[index]['content_question']);</script></p>
 						</div>
-						<div class = 'row'>
+						<div class = 'row' id='row'>
+						<link type='text/css' href='../public/css/custom-learning-question.css' rel='stylesheet'>
 			";
 
 			echo "
@@ -330,21 +340,38 @@
 						</div>
 					</div>
 					<div id='button-inside-div'>
-						<button type='button' class='btn btn-warning' id='skip-button'>Skip</button>
+						<button type='button' class='btn btn-warning' id='skip-button' onclick='ChangeQuestion()' disabled = 'true'>Skip</button>
 						<button type='button' class='btn btn-success' id='check-button' onclick='CheckQuestion()'>Check</button>
 					</div>
 				</div>
 			";
-
-			self::CheckQuestion();
 		}	
 
 		private function CheckQuestion () {
 			echo "
 				<script>
 					function CheckQuestion () {
+						
+
+						if (checkChangeForm == true) {
+							if (document.getElementById('answer').value == '') {
+								alert('Write answer');
+								return;
+							}
+						}
+						else {
+							if (CheckRadio() == false) {
+								alert('Choose an answser');
+								return;
+							}
+						}
+						document.getElementById('skip-button').disabled = false;
 						var radio = document.getElementsByName('answser');
 						var img = document.getElementById('answer-inside-img');
+
+						for  (var i = 0; i < radio.length; i++) {
+							radio[i].disabled = true;
+						}
 		
 						for (var i = 0;i < radio.length; i++) {
 							if (radio[i].checked) {
@@ -361,5 +388,108 @@
 				</script>
 			";
 		}
+
+		private function ChangeQuestion () {
+			echo "
+				<script>
+				function ChangeQuestion() {
+					index++;
+					if (index >= listQuesChoi.length) {
+						index = 0;
+						ClearnForm();
+						ChangeForm();
+						checkChangeForm = true;
+						return;
+					}
+
+					if (checkChangeForm == true) {
+						
+					}
+
+					document.getElementById('a1').innerHTML = listQuesChoi[index]['choice_1'];
+					document.getElementById('a2').innerHTML = listQuesChoi[index]['choice_2'];
+					document.getElementById('a3').innerHTML = listQuesChoi[index]['choice_3'];
+					document.getElementById('title').innerHTML = listQuesChoi[index]['content_question'];
+					Clear();
+				}
+
+				function Clear() {
+					var ra = document.getElementsByName('answser');
+					for (var i = 0;i < ra.length; i++) {
+						ra[i].disabled = false;
+						ra[i].checked = false;
+					}
+
+					var img = document.getElementById('answer-inside-img');
+					img.removeAttribute('src');
+					document.getElementById('isTrue').inner = '';
+				}
+
+				function CheckRadio () {
+					var ra = document.getElementsByName('answser');
+					if (!ra[0].checked && !ra[1].checked && !ra[2].checked) {
+						return false;
+					}
+					return true;
+				}
+				</script>
+			";
+		}
+
+		private function ClearnForm () {
+			echo "
+				<script>
+					function ClearnForm () {
+						var row = document.getElementById('row');
+						while(row.firstChild) {
+							row.removeChild(row.firstChild);
+						}
+					}
+				</script>
+			";
+		}
+
+		private function ChangeForm () {
+			echo "
+				<script>
+					function ChangeForm() {
+						var div1 = document.createElement('div');
+						div1.setAttribute('class','thumb-div rounded');
+						var div2 = document.createElement('div');
+						div2.setAttribute('class','thumb-div rounded');
+
+						var p = document.createElement('p');
+						p.setAttribute('id','ques');
+						var textNode = document.createTextNode(listQuesWri[index]['content_question']);
+						p.appendChild(textNode);
+						var text = document.createElement('textarea');
+						text.setAttribute('id','answer');
+
+						var link = document.createElement('link');
+						link.setAttribute('type','text/css');
+						link.setAttribute('href','../public/css/custom-learning-question-writing.css');
+						link.setAttribute('rel','stylesheet');
+
+						div1.appendChild(p);
+						div2.appendChild(text);
+						var row = document.getElementById('row');
+						row.appendChild(div1);
+						row.appendChild(div2);
+						row.appendChild(link);
+
+						document.getElementById('title').innerHTML = 'Translate';
+					}
+				</script>
+			";
+		}
+
+		private function LoadQuestionWri() {
+			echo "
+				function LoadQuestionWri() {
+
+				}
+			";
+		}
+
 	} 
 ?>

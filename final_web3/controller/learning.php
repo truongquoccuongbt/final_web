@@ -1,10 +1,10 @@
 <?php
-	include '../models/progress.php';
 	include 'course.php';
 	include 'chapter.php';
 	include 'lesson.php';
 	include 'question_choices.php';
 	include 'question_writes.php';
+	include 'progress.php';
 
 	class Learning {
 		public function View() {
@@ -94,16 +94,29 @@
 		}
 
 		private function PrintInforUser() {
+			$length = sizeof($_SESSION['inforUser'][0]);
+			$count = 0;
 			if ($_SESSION['inforUser'] != null) {
 				foreach ($_SESSION['inforUser'][0] as $row) {
-					$date = 
+					$count++;
+					$date = strtotime($row['date']);
+					$format = date("d/m/Y", $date);
 					echo "
 						<tr>
-							<td>{self::PrintInforUser($row['date'])}</td>
-							<td>{$row['score']}</td>
-							<td></td>
+							<td>{$format}</td>
+							<td>{$row['score']}</td>";
+					if (isset($_SESSION['score']) && $count == $length) {
+						echo "
+								<td> +{$_SESSION['score']}</td>
+								</tr>
+							";
+					}
+					else {
+						echo "
+							<td></td>	
 						</tr>
 					";
+					}
 				}
 			}
 			else {
@@ -639,18 +652,45 @@
 		}
 
 		public function BackLesson () {
-			$diem = $_GET['backLesson'];
-			self::SavePointOnServer($diem);
-			
-			// header("Location: index_learning.php?controller=learning&action=StartLesson&idCourse={$_SESSION['idCourse']}&idChapter={$_SESSION['idChapter']} ");
-			// exit();
+			$point = $_GET['backLesson'];
+			self::SavePointOnServer($point);
+			$_SESSION['score'] = $point;
+			self::ReGetProgressOfUser();
+			header("Location: index_learning.php?controller=learning&action=StartLesson&idCourse={$_SESSION['idCourse']}&idChapter={$_SESSION['idChapter']} ");
+			exit();
+		}
+
+		private function ReGetProgressOfUser() {
+			$inforUser = Progress::GetProgressOfUser($_SESSION['idUser']);
+			$_SESSION['inforUser'] = array();
+			array_push($_SESSION['inforUser'], $inforUser);
 		}
 
 		public function SavePointOnServer($point) {
-			$day = date("d/m/Y");
-			var_dump($day);
+			$inforUser = Progress::GetProgressOfUser($_SESSION['idUser']);
+			$date = date("d/m/Y");
+			$checkExistUser = self::CheckExistProgressOfUser($inforUser, $_SESSION['idUser'], $date);
+			
+			if ($checkExistUser) {
+				$user = Progress::GetProgressOfUserWithDate($_SESSION['idUser'], $date);
+				$user[0]['score'] += $point;
+				Progress::UpdateProgressOfUser($user[0]['id_user'], $user[0]['date'], $user[0]['score']); 
+			}
+			else {
+				Progress::InsertProgressOfUser($_SESSION['idUser'], $date, $point);
+			}
 		}
 
-
+		private function CheckExistProgressOfUser($inforUser, $idUser, $date) {
+			foreach ($inforUser as $row) {
+				$tmp = strtotime($row['date']);
+				$formatDay = date('d/m/Y', $tmp);
+				
+				if ($idUser == $row['id_user'] && $date == $formatDay) {
+					return true;
+				}
+			}
+			return false;
+		}
 	} 
 ?>

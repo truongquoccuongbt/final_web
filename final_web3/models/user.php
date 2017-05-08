@@ -19,5 +19,14 @@
 			$stmt->closeCursor();
 			return $result;
 		}
+
+		public static function InsertUser ($idUser, $password, $email, $firstName, $lastName, $totalScore) {
+			$db = Database::connect();
+			$sql = "INSERT INTO `users`(`id_user`, `password`, `email`, `first_name`, `last_name`, `total_score`) VALUES ('$idUser','$password','$email','$firstName','$lastName',$totalScore)";
+			$stmt = $db->prepare($sql);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+		}
 	} 
 ?>

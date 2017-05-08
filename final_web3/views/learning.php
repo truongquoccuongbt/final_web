@@ -34,7 +34,7 @@
 		<section class="header-sec">
 		</section>
 		<section class="info1-sec">
-			<?php require_once 'routes_learning.php'; ?>
+			<?php require_once 'routes.php'; ?>
 		</section>
 		<section class="footer-sec">
 			<p>[Đồ án môn Phát Triển Ứng Dụng Web - Website học tiếng Anh online]</p>

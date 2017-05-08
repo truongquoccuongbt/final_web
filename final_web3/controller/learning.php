@@ -70,12 +70,10 @@
 							  	<th></th>
 							</tr>
 					  	</thead>
-					 	<tbody>
-							<tr>
-							  	<td>{$_SESSION['date']}</td>
-							   	<td>{$_SESSION['score']}</td>
-							   	<td></td>
-							</tr>
+					 	<tbody>";
+			self::PrintInforUser();
+			
+			echo "			
 						</tbody>
 					</table>
 				</div>
@@ -86,12 +84,42 @@
 		public function SignOut () {
 			$_SESSION = array();
 			session_destroy();
-			header("Location: ../index.php");
+			header("Location: signin.php");
 			exit();
+		}
+
+		private function ConvertDate($date) {
+			$tmp = strtotime($date);
+			return date('d/m/Y',$tmp);
+		}
+
+		private function PrintInforUser() {
+			if ($_SESSION['inforUser'] != null) {
+				foreach ($_SESSION['inforUser'][0] as $row) {
+					$date = 
+					echo "
+						<tr>
+							<td>{self::PrintInforUser($row['date'])}</td>
+							<td>{$row['score']}</td>
+							<td></td>
+						</tr>
+					";
+				}
+			}
+			else {
+				echo "
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					";
+			}
 		}
 
 		public function StartCourse () {
 			$idCourse = $_GET['idCourse'];
+			$_SESSION['idCourse'] = $idCourse;
 			echo "
 				<link type='text/css' href='../public/css/custom-learning-chapter.css' rel='stylesheet'>
 				<div id='info1-left-div'>
@@ -176,12 +204,10 @@
 							  	<th></th>
 							</tr>
 					  	</thead>
-					 	<tbody>
-							<tr>
-							  	<td>{$_SESSION['date']}</td>
-							   	<td>{$_SESSION['score']}</td>
-							   	<td></td>
-							</tr>
+					 	<tbody>";
+
+			self::PrintInforUser();
+			echo "		
 						</tbody>
 					</table>
 				</div>
@@ -192,6 +218,7 @@
 		public function StartLesson () {
 			$idChapter = $_GET['idChapter'];
 			$idCourse = $_GET['idCourse'];
+			$_SESSION['idChapter'] = $idChapter;
 			$listLesson = Lesson::GetLessonByIdChapter($idChapter);
 			$count = 0;
 			echo "
@@ -244,12 +271,10 @@
 							  	<th></th>
 							</tr>
 					  	</thead>
-					 	<tbody>
-							<tr>
-							  	<td>{$_SESSION['date']}</td>
-							   	<td>{$_SESSION['score']}</td>
-							   	<td></td>
-							</tr>
+					 	<tbody>";
+
+			self::PrintInforUser();			
+			echo "
 						</tbody>
 					</table>
 				</div>
@@ -268,6 +293,7 @@
 			self::ClearnForm();
 			self::ChangeForm();
 			self::CheckAnswerWri();
+			self::CreateFormResult();
 		}
 
 		private function StartQuestionChoi ($listQuesChoi, $listQuesWri) {
@@ -279,6 +305,8 @@
 			echo "var index = 0;var pic1 = 'picture_1'; var pic2 = 'picture_2'; var pic3 = 'picture_3'; var lengthOfQuesChoi = listQuesChoi.length;
 				var lengthOfQuesWri = listQuesWri.length;
 				var checkChangeForm = false;
+				var point = 0;
+				var numberOfQuestion = listQuesChoi.length + listQuesWri.length;
 			</script>";
 
 
@@ -364,6 +392,7 @@
 									img.setAttribute('src','../public/image/true.PNG');
 									document.getElementById('isTrue').innerHTML = 'TRUE';
 									document.getElementById('answer').disabled = true;
+									point++;
 								}
 								else {
 									img.setAttribute('src','../public/image/false.PNG');
@@ -391,6 +420,7 @@
 									if (radio[i].value == listQuesChoi[index]['answer']) {
 										img.setAttribute('src','../public/image/true.PNG');
 										document.getElementById('isTrue').innerHTML = 'TRUE';
+										point++;
 										return;
 									}
 								}
@@ -411,7 +441,7 @@
 					if (checkChangeForm == false) {
 						if (index >= listQuesChoi.length) {
 							index = 0;
-							ClearnForm();
+							ClearnForm('row');
 							ChangeForm();
 							checkChangeForm = true;
 							return;
@@ -425,6 +455,12 @@
 						Clear();
 					}
 					else {
+						if (index == listQuesWri.length) {
+							ClearnForm('info1-div');
+							CreateFormResult();
+							return;
+						}
+
 						document.getElementById('ques').innerHTML = listQuesWri[index]['content_question'];
 						document.getElementById('answer').disabled = false;
 						document.getElementById('answer').value = '';
@@ -462,8 +498,8 @@
 		private function ClearnForm () {
 			echo "
 				<script>
-					function ClearnForm () {
-						var row = document.getElementById('row');
+					function ClearnForm (id) {
+						var row = document.getElementById(id);
 						while(row.firstChild) {
 							row.removeChild(row.firstChild);
 						}
@@ -541,6 +577,80 @@
 				</script>
 			";
 		}
+
+		private function CreateFormResult () {
+			echo "
+				<script>
+					function CreateFormResult() {
+						var div = document.getElementById('info1-div');
+
+						var link = document.createElement('link');
+						link.setAttribute('type','text/css');
+						link.setAttribute('href','../public/css/custom-learning-result.css');
+						link.setAttribute('rel','stylesheet');
+						div.appendChild(link);
+
+						var divChild1 = document.createElement('div');
+						divChild1.setAttribute('id','question-inside-div');				
+		
+						var h1 = document.createElement('h1');
+						var textH1 = document.createTextNode('Lesson complete! +');
+						h1.appendChild(textH1);
+						var span = document.createElement('span');
+						span.setAttribute('id','score');
+						span.setAttribute('name','score');
+						var textPoint = document.createTextNode(point);
+						span.appendChild(textPoint);
+						h1.appendChild(span);
+						var text = document.createTextNode('XP');
+						h1.appendChild(text);
+
+						var p = document.createElement('p');
+						p.setAttribute('id','true-answer');
+						var textResult = document.createTextNode(point + '/' + numberOfQuestion);
+						p.appendChild(textResult);
+
+						divChild1.appendChild(h1);
+						divChild1.appendChild(p);
+
+						
+
+						var divChild2 = document.createElement('div');
+						var form = document.createElement('form');
+						divChild2.setAttribute('id','button-inside-div');
+						
+						var button = document.createElement('button');
+						button.setAttribute('type','submit');
+						button.setAttribute('value', point);
+						button.setAttribute('name','backLesson');
+				
+						button.setAttribute('class','btn btn-warning');
+						button.setAttribute('id','check-button');
+						var textButton = document.createTextNode('Back to lesson');
+						button.appendChild(textButton);
+						form.appendChild(button);
+						divChild2.appendChild(form);
+						
+						div.appendChild(divChild1);
+						div.appendChild(divChild2);
+					}
+				</script>
+			";
+		}
+
+		public function BackLesson () {
+			$diem = $_GET['backLesson'];
+			self::SavePointOnServer($diem);
+			
+			// header("Location: index_learning.php?controller=learning&action=StartLesson&idCourse={$_SESSION['idCourse']}&idChapter={$_SESSION['idChapter']} ");
+			// exit();
+		}
+
+		public function SavePointOnServer($point) {
+			$day = date("d/m/Y");
+			var_dump($day);
+		}
+
 
 	} 
 ?>

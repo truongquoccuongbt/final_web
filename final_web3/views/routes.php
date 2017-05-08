@@ -5,6 +5,12 @@
 		case 'learning':
 			$controller = new Learning();
 			break;
+		case 'signin':
+			$controller = new SignIn();
+			break;
+		case 'signup':
+			$controller = new SignUp();
+			break;
 	}
 	$controller-> {$action}();
 ?>

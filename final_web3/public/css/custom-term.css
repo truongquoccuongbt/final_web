@@ -1,0 +1,82 @@
+/*CUSTOM CSS*/
+
+#header-logo {
+	width: 250px;
+}
+
+.text-center {
+	background-color: rgba(241,241,241,1.00);
+	width: 100%;
+	height: 100%;
+}
+
+.header-sec {
+	width: 100%;
+	height: 300px;
+	background-image: url(../image/background-signup.png);
+	background-size:     cover;                     
+    background-repeat:   no-repeat;
+    background-position: center center;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+.info1-sec {
+	height: 300px;
+	text-align: center;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	padding-top: 5%;
+}
+
+/**/
+
+/* FOR HEADER */
+header {
+	width: 100%;
+	top: 0;
+	padding: 25px;
+	position: fixed;
+	z-index: 1000;
+	padding-left: 10%;
+	padding-right: 10%;
+	font-size: 20px;
+	background-color: rgba(95,201,241,1.00);
+}
+
+#header-logo {
+	width: 250px;
+}
+
+.site-nav {
+	position: relative;
+	display: block !important;
+	float: right;
+}
+
+.site-nav ul {
+	list-style-image: none;
+	text-align: right;
+}
+
+.site-nav ul li {
+	display: inline-block;
+}
+/******************************************************/
+
+/* FOR FOOTER */
+
+
+.footer-sec {
+	height: 500px;
+	text-align: center;
+	padding-top: 100px;
+	background-image: url(../image/background-signup.png);
+	background-size:     cover;                     
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+/******************************************************/
+
+
+

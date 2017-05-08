@@ -7,5 +7,8 @@
 			break;
 	}
 
+	if (isset($_POST['login'])) {
+	 	$action = 'Login';
+	 }
 	$controller->{$action}();
 ?>

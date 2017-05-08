@@ -9,5 +9,14 @@
 			$stmt->closeCursor();
 			return $result;
 		}
+
+		public static function InsertProgressOfUser ($idUser, $date, $score) {
+			$db = Database::connect();
+			$sql = "INSERT INTO `progress`(`date`, `id_user`, `score`) VALUES ('$date','$idUser', $score)";
+			$stmt = $db->prepare($sql);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+		}
 	} 
 ?>

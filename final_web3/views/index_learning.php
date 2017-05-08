@@ -3,7 +3,7 @@
 	 require_once '../config/db.php';
 
 	 if (!isset($_SESSION['idUser'])) {
-	 	header("Location: ../index.php");
+	 	header("Location: signin.php");
 	 	exit();
 	 }
 
@@ -27,6 +27,11 @@
 	 if (isset($_POST['signOut'])) {
 	 	$controller = "learning";
 	 	$action = "SignOut";
+	 }
+
+	 if (isset($_GET['backLesson'])) {
+	 	$controller = "learning";
+	 	$action = "BackLesson";
 	 }
 	 
 	 require_once 'learning.php';

@@ -2,8 +2,8 @@
 	session_start(); 
 	require_once '../config/db.php';
 
-	if (isset($_SESSION['idUser'])) {
-		header("Location: views/learning.php");
+	if (isset($_SESSION['idAdmin'])) {
+		header("Location: views/home.php");
 		exit();
 	}
 

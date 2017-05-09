@@ -82,8 +82,8 @@
 		}
 
 		public function SignOut () {
-			$_SESSION = array();
-			session_destroy();
+			$_SESSION['idUser'] = null;
+			//session_destroy();
 			header("Location: signin.php");
 			exit();
 		}

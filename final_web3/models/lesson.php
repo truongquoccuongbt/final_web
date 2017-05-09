@@ -9,5 +9,15 @@
 			$stmt->closeCursor();
 			return $result;
 		}
+
+		public function GetAllLesson() {
+			$db = Database::connect();
+			$sql = "SELECT * FROM lessons;";
+			$stmt = $db->prepare($sql);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+			return $result;
+		}
 	} 
 ?>

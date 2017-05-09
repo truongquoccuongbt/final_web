@@ -9,5 +9,15 @@
 			$stmt->closeCursor();
 			return $result;
 		}
+
+		public function GetAllChapter() {
+			$db = Database::connect();
+			$sql = "SELECT * FROM chapters;";
+			$stmt = $db->prepare($sql);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+			return $result;
+		}
 	} 
 ?>

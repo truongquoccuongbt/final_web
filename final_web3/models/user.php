@@ -28,5 +28,14 @@
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$stmt->closeCursor();
 		}
+
+		public static function DeleteUser($idUser) {
+			$db = Database::connect();
+			$sql = "DELETE FROM `users` WHERE id_user='$idUser'";
+			$stmt = $db->prepare($sql);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+		}
 	} 
 ?>

@@ -5,5 +5,9 @@
 			$listLesson = LessonModel::GetAllLesson();
 			return $listLesson;
 		}
+
+		public function InsertLesson($idLesson, $idChapter, $contentLesson) {
+			LessonModel::InsertLesson($idLesson, $idChapter, $contentLesson);
+		}
 	} 
 ?>

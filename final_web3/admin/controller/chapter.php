@@ -10,5 +10,9 @@
 			$listChapter = ChapterModel::GetChapterWithIdCourse($idCourse);
 			return $listChapter;
 		}
+
+		public function InsertChapter($idChapter, $idCourse, $nameChapter) {
+			ChapterModel::InsertChapter($idChapter, $idCourse, $nameChapter);
+		}
 	} 
 ?>

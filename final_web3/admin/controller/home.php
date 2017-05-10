@@ -171,7 +171,8 @@
 			echo "
 				</div>
 			</div>
-			<div id='edit-div' class='row rounded'>";
+			<div id='edit-div' class='row rounded'>
+			<form>";
 
 			self::TableCourse();
 			self::TableChapter();
@@ -179,7 +180,8 @@
 			self::TableQuestionChoi();
 			self::TableQuestionWri();
 			
-			echo "		
+			echo "
+				</form>
 				</div>
 			";
 
@@ -198,6 +200,14 @@
 			self::ClearTableLesson();
 			self::ClearTableQuesChoi();
 			self::ClearTableQuesWri();
+			self::CreateNewId();
+			self::AddChapter();
+			self::AddLesson();
+			self::AddQuesChoi();
+			self::AddQuesWri();
+			self::DisplayCourseOnTableChapter();
+			self::DisplayChapterOnTableLesson();
+			self::DisplayLessonOnTableQues();
 		}
 		private function ColumnCourse() {
 			$count = 0;
@@ -244,14 +254,14 @@
 					<thead><th>Course</th></thead>
 					<tr>
 						<td>id_course</td>
-						<td><input type='txt' readonly id='idCourse'></td>
+						<td><input type='txt' readonly id='idCourse' name='idCourse'></td>
 					</tr>
 					<tr>
 						<td>name_course</td>
-						<td><input type='txt' id='nameCourse'></td>
+						<td><input type='txt' id='nameCourse' name='nameCourse'></td>
 					</tr>
 					<tr>
-						<td><button type='button' class='btn btn-primary'>Add</button> <button type='submit' class='btn btn-success'>Save</button></td>
+						<td><button type='button' class='btn btn-primary' id='addCourse'>Add</button> <button type='submit' class='btn btn-success' name='saveCourse'>Save</button></td>
 					</tr>
 				</table>
 			";
@@ -263,18 +273,18 @@
 					<thead><th>Chapter</th></thead>
 					<tr>
 						<td>id_chapter</td>
-						<td><input type='txt' readonly id='idChapter'></td>
+						<td><input type='txt' readonly id='idChapter' name='idChapter'></td>
 					</tr>
 					<tr>
 						<td>id_course</td>
-						<td><select id='selectCourse' disabled='true'></select></td>
+						<td><select id='selectCourse' disabled='true' name='selectCourse'></select></td>
 					</tr>
 					<tr>
 						<td>name_chapter</td>
-						<td><input type='txt' id='nameChapter'></td>
+						<td><input type='txt' id='nameChapter' name='nameChapter'></td>
 					</tr>
 					<tr>
-						<td><button type='button' class='btn btn-primary' id='addCourse'>Add</button> <button type='submit' class='btn btn-success' name='saveCourse'>Save</button></td>
+						<td><button type='button' class='btn btn-primary' id='addChapter' onclick='AddChapter()'>Add</button> <button type='submit' class='btn btn-success' name='saveChapter'>Save</button></td>
 					</tr>
 				</table>
 			";
@@ -286,18 +296,18 @@
 					<thead><th>Lesson</th></thead>
 					<tr>
 						<td>id_lesson</td>
-						<td><input type='txt' readonly id='idLesson'></td>
+						<td><input type='txt' readonly id='idLesson' name='idLesson'></td>
 					</tr>
 					<tr>
 						<td>id_chapter</td>
-						<td><select id='selectChapter' disabled='true'></select></td>
+						<td><select id='selectChapter' name='selectChapter' disabled='true'></select></td>
 					</tr>
 					<tr>
 						<td>content_question</td>
-						<td><input type='txt' id='contentQues'></td>
+						<td><input type='txt' id='contentLesson' name='contentLesson'></td>
 					</tr>
 					<tr>
-						<td><button type='button' class='btn btn-primary' id='addLesson'>Add</button> <button type='submit' class='btn btn-success' name='saveLesson'>Save</button></td>
+						<td><button type='button' class='btn btn-primary' id='addLesson' onclick='AddLesson()'>Add</button> <button type='submit' class='btn btn-success' name='saveLesson'>Save</button></td>
 					</tr>
 				</table>
 			";
@@ -309,40 +319,40 @@
 					<thead><th>Question_Choices</th></thead>
 					<tr>
 						<td>id</td>
-						<td><input type='txt' readonly id='idQuesChoi'></td>
+						<td><input type='txt' readonly id='idQuesChoi' name='idQuesChoi'></td>
 					</tr>
 					<tr>
 						<td>id_lesson</td>
-						<td><select id='selectLessonChoi' disabled='true'></select></td>
+						<td><select id='selectLessonChoi' disabled='true' name='selectLessonChoi'></select></td>
 					</tr>
 					<tr>
 						<td>content_question</td>
-						<td><input type='txt' id='contentQuesChoi'></td>
+						<td><input type='txt' id='contentQuesChoi' name='contentQuesChoi'></td>
 					</tr>
 					<tr>
 						<td>choise 1</td>
-						<td><input type='txt' id='choice1'></td>
-						<td><input type='txt' id='pic1'></td>
+						<td><input type='txt' id='choice1' name='choice1'></td>
+						<td><input type='txt' id='pic1' name='pic1'></td>
 						<td><button type='submit' class='btn btn-info'>Image Link</button></td>
 					</tr>
 					<tr>
 						<td>choise 2</td>
-						<td><input type='txt' id='choice2'></td>
-						<td><input type='txt' id='pic2'></td>
+						<td><input type='txt' id='choice2' name='choice2'></td>
+						<td><input type='txt' id='pic2' name='pic2'></td>
 						<td><button type='submit' class='btn btn-info'>Image Link</button></td>
 					</tr>
 					<tr>
 						<td>choise 3</td>
-						<td><input type='txt' id='choice3'></td>
-						<td><input type='txt' id='pic3'></td>
+						<td><input type='txt' id='choice3' name='choice3'></td>
+						<td><input type='txt' id='pic3' name='pic3'></td>
 						<td><button type='submit' class='btn btn-info'>Image Link</button></td>
 					</tr>
 					<tr>
 						<td>answer</td>
-						<td><input type='txt' id='ansChoi'></td>
+						<td><input type='txt' id='ansChoi' name='ansChoi'></td>
 					</tr>
 					<tr>
-						<td><button type='button' class='btn btn-primary' id='addQuesChoi'>Add</button> <button type='submit' class='btn btn-success' name='saveQuesChoi'>Save</button></td>
+						<td><button type='button' class='btn btn-primary' id='addQuesChoi' onclick='AddQuesChoi()'>Add</button> <button type='submit' class='btn btn-success' name='saveQuesChoi'>Save</button></td>
 					</tr>
 				</table>
 			";
@@ -354,22 +364,22 @@
 					<thead><th>Question_Write</th></thead>
 					<tr>
 						<td>id</td>
-						<td><input type='txt' readonly id='idQuesWri'></td>
+						<td><input type='txt' readonly id='idQuesWri' name='idQuesWri'></td>
 					</tr>
 					<tr>
 						<td>id_lesson</td>
-						<td><select id='selectLessonWri' disabled='true'></select></td>
+						<td><select id='selectLessonWri' disabled='true' name='selectLessonWri'></select></td>
 					</tr>
 					<tr>
 						<td>content_question</td>
-						<td><input type='txt' id='contentQuesWri'></td>
+						<td><input type='txt' id='contentQuesWri' name='contentQuesWri'></td>
 					</tr>
 					<tr>
 						<td>answer</td>
-						<td><input type='txt' id='ansWri'></td>
+						<td><input type='txt' id='ansWri' name='ansWri'></td>
 					</tr>
 					<tr>
-						<td><button type='button' class='btn btn-primary' id='addQuesWri'>Add</button> <button type='submit' class='btn btn-success' name='saveQuesWri'>Save</button></td>
+						<td><button type='button' class='btn btn-primary' id='addQuesWri' onclick='AddQuesWri()'>Add</button> <button type='submit' class='btn btn-success' name='saveQuesWri'>Save</button></td>
 					</tr>
 				</table>
 			";
@@ -379,6 +389,10 @@
 			echo "
 				<script>
 					function GetChapterWithCourse() {
+						document.getElementById('selectCourse').disabled = true;
+						document.getElementById('selectChapter').disabled = true;
+						document.getElementById('selectLessonChoi').disabled = true;
+						document.getElementById('selectLessonWri').disabled = true;
 						var count = 0;
 						var idCourse = document.getElementById('course').value;
 						var select = document.getElementById('chapter');
@@ -411,6 +425,10 @@
 			echo "
 				<script>
 					function GetLessonWithChapter() {
+						document.getElementById('selectCourse').disabled = true;
+						document.getElementById('selectChapter').disabled = true;
+						document.getElementById('selectLessonChoi').disabled = true;
+						document.getElementById('selectLessonWri').disabled = true;
 						var count = 0;
 						var idChapter = document.getElementById('chapter').value;
 						var select = document.getElementById('lesson');
@@ -440,6 +458,10 @@
 			echo "
 				<script>
 					function GetQuestionWithLesson() {
+						document.getElementById('selectCourse').disabled = true;
+						document.getElementById('selectChapter').disabled = true;
+						document.getElementById('selectLessonChoi').disabled = true;
+						document.getElementById('selectLessonWri').disabled = true;
 						var count = 0;
 						var idLesson = document.getElementById('lesson').value;
 						var select = document.getElementById('question');
@@ -529,7 +551,7 @@
 					function DisplayTableLesson() {
 						var idLesson = document.getElementById('lesson').value;
 						var id = document.getElementById('idLesson');
-						var name = document.getElementById('contentQues');
+						var name = document.getElementById('contentLesson');
 						for (var i = 0; i < listLesson.length; i++) {
 							if (idLesson == listLesson[i]['id_lesson']) {
 								id.value = listLesson[i]['id_lesson'];
@@ -563,6 +585,11 @@
 			echo "
 				<script>
 					function DisplayTableQuesWri(idQues) {
+						document.getElementById('selectCourse').disabled = true;
+						document.getElementById('selectChapter').disabled = true;
+						document.getElementById('selectLessonChoi').disabled = true;
+						document.getElementById('selectLessonWri').disabled = true;
+
 						var idQuesWri = document.getElementById('idQuesWri');
 						var contentQuesWri = document.getElementById('contentQuesWri');
 						var ansWri = document.getElementById('ansWri');
@@ -582,6 +609,11 @@
 			echo "
 				<script>
 					function DisplayTableQuesChoi(idQues) {
+						document.getElementById('selectCourse').disabled = true;
+						document.getElementById('selectChapter').disabled = true;
+						document.getElementById('selectLessonChoi').disabled = true;
+						document.getElementById('selectLessonWri').disabled = true;
+
 						var idQuesChoi = document.getElementById('idQuesChoi');
 						var contentQuesChoi = document.getElementById('contentQuesChoi');
 						var choice1 = document.getElementById('choice1');
@@ -637,7 +669,7 @@
 				<script>
 					function ClearTableLesson() {
 						document.getElementById('idLesson').value = '';
-						document.getElementById('contentQues').value = '';
+						document.getElementById('contentLesson').value = '';
 					}
 				</script>
 			";
@@ -670,6 +702,161 @@
 						document.getElementById('idQuesWri').value = '';
 						document.getElementById('contentQuesWri').value = '';
 						document.getElementById('ansWri').value = '';
+					}
+				</script>
+			";
+		}
+
+		private function CreateNewId() {
+			echo "
+				<script>
+					function CreateNewId(list, id, idCode) {
+						var tmp = list[list.length - 1][idCode];
+						tmp = tmp.replace(id,'');
+						var count = parseInt(tmp) + 1;
+
+						if (id.length == 1) {
+							switch (count.toString().length) {
+								case 1:
+									id = id + '000' + count.toString();
+									break;
+								case 2:
+									id = id + '00' + count.toString();
+									break;
+								case 3:
+									id = id + '0' + count.toString();
+									break;
+								default:
+									id = id + count.toString();
+									break;
+
+							}
+						}
+						else {
+							switch (count.toString().length) {
+								case 1:
+									id = id + '00' + count.toString();
+									break;
+								case 2: 
+									id = id + '0' + count.toString();
+									break;
+								default:
+									id = id + count.toString();
+									break;
+							}
+						}
+						return id;
+					}
+				</script>
+			";
+		}
+
+		private function AddChapter() {
+			echo "
+				<script>
+					function AddChapter() {
+						document.getElementById('selectCourse').disabled = false;
+						DisplayCourseOnTableChapter();
+						ClearTableChapter();
+						var id = 'C';
+						id = CreateNewId(listChapter, id, 'id_chapter');
+						document.getElementById('idChapter').value = id;
+					}
+				</script>
+			";
+		}
+
+		private function AddLesson() {
+			echo "
+				<script>
+					function AddLesson() {
+						document.getElementById('selectChapter').disabled = false;
+						DisplayChapterOnTableLesson();
+						ClearTableLesson();
+						var id = 'L';
+						id = CreateNewId(listLesson, id, 'id_lesson');
+						document.getElementById('idLesson').value = id;
+					}
+				</script>
+			";
+		}
+
+		private function AddQuesChoi() {
+			echo "
+				<script>
+					function AddQuesChoi() {
+						document.getElementById('selectLessonChoi').disabled = false;
+						DisplayLessonOnTableQues('selectLessonChoi');
+						ClearTableQuesChoi();
+						var id = 'QC';
+						id = CreateNewId(listQuesChoi, id, 'id_question_choice');
+						document.getElementById('idQuesChoi').value = id;
+					}
+				</script>
+			";
+		}
+
+		private function AddQuesWri() {
+			echo "
+				<script>
+					function AddQuesWri() {
+						document.getElementById('selectLessonWri').disabled = false;
+						DisplayLessonOnTableQues('selectLessonWri');
+						ClearTableQuesWri();
+						var id = 'QW';
+						id = CreateNewId(listQuesWri, id, 'id_question_write');
+						document.getElementById('idQuesWri').value = id;
+					}
+				</script>
+			";
+		}
+
+		private function DisplayCourseOnTableChapter() {
+			echo "
+				<script>
+					function DisplayCourseOnTableChapter() {
+						var select = document.getElementById('selectCourse');
+						for (var i = 0;i < listCourse.length;i++) {
+							var option = document.createElement('option');
+							option.setAttribute('value',listCourse[i]['id_course']);
+							var text = document.createTextNode(listCourse[i]['name_course']);
+							option.appendChild(text);
+							select.appendChild(option);
+						}
+					}
+				</script>
+			";
+		}
+
+		private function DisplayChapterOnTableLesson() {
+			echo "
+				<script>
+					function DisplayChapterOnTableLesson() {
+						var select = document.getElementById('selectChapter');
+						for (var i = 0;i < listChapter.length;i++) {
+							var option = document.createElement('option');
+							option.setAttribute('value',listChapter[i]['id_chapter']);
+							var text = document.createTextNode(listChapter[i]['name_chapter']);
+							option.appendChild(text);
+							select.appendChild(option);
+						}
+					}
+				</script>
+			";
+		}
+
+		private function DisplayLessonOnTableQues() {
+			echo "
+				<script>
+					function DisplayLessonOnTableQues(selection) {
+						var select = document.getElementById(selection);
+						for (var i = 0;i < listLesson.length;i++) {
+							var option = document.createElement('option');
+							option.setAttribute('value',listLesson[i]['id_lesson']);
+							var text = document.createTextNode(listLesson[i]['content_lesson']);
+							option.appendChild(text);
+							select.appendChild(option);
+						}
 					}
 				</script>
 			";

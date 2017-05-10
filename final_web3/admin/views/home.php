@@ -21,9 +21,26 @@
 		$action = "SignOut";
 	}
 
-	if (isset($_GET['removeUser'])) {
-		$action = "DeleteUser";
-	}
+	// if (isset($_GET['removeUser'])) {
+	// 	$action = "DeleteUser";
+	// }
+
+	// if (isset($_GET['saveCourse'])) {
+	// 	$action = "SaveCourse";
+	// }
+	// else if (isset($_GET['saveChapter'])) {
+	// 	$action = "SaveChapter";
+	// }
+	// else if (isset($_GET['saveLesson'])) {
+	// 	$action = "SaveLesson";
+	// }
+	// else if (isset($_GET['saveQuesChoi'])) {
+	// 	$action = "SaveQuesChoi";
+	// }
+	// else {
+	// 	$action = "SaveQuesWri";
+	// }
+
 
 	require_once 'home-gui.php';
 ?>

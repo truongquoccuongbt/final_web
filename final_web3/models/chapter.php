@@ -19,5 +19,14 @@
 			$stmt->closeCursor();
 			return $result;
 		}
+
+		public function InsertChapter($idChapter, $idCourse, $nameChapter) {
+			$db = Database::connect();
+			$sql = "INSERT INTO `chapters`(`id_chapter`, `id_course`, `name_chapter`) VALUES ('$idChapter','$idCourse','$nameChapter');";
+			$stmt = $db->prepare($sql);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+		}
 	} 
 ?>

@@ -19,5 +19,14 @@
 			$stmt->closeCursor();
 			return $result;
 		}
+
+		public static function InsertQuesWri($idQuesWri, $idLesson, $contentQues, $answer) {
+			$db = Database::connect();
+			$sql = "INSERT INTO `question_writes`(`id_question_write`, `id_lesson`, `content_question`, `answer`) VALUES ('$idQuesWri','$idLesson','$contentQues','$answer');";
+			$stmt = $db->prepare($sql);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+		}
 	} 
 ?>

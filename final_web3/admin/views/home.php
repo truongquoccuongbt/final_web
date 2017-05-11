@@ -21,13 +21,13 @@
 		$action = "SignOut";
 	}
 
-	// if (isset($_GET['removeUser'])) {
-	// 	$action = "DeleteUser";
-	// }
+	if (isset($_GET['removeUser'])) {
+	 	$action = "DeleteUser";
+	}
 
-	// if (isset($_GET['saveCourse'])) {
-	// 	$action = "SaveCourse";
-	// }
+	if (isset($_GET['saveCourse'])) {
+	 	$action = "SaveCourse";
+	}
 	// else if (isset($_GET['saveChapter'])) {
 	// 	$action = "SaveChapter";
 	// }

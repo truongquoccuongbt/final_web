@@ -15,8 +15,15 @@
 			$sql = "INSERT INTO `courses`(`id_course`, `name_course`) VALUES ('$idCourse','$nameCourse');";
 			$stmt = $db->prepare($sql);
 			$stmt->execute();
+			if ($stmt->errorCode() == 23000) {
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$stmt->closeCursor();
+				return false;
+			}
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$stmt->closeCursor();
+			return true;
+			
 		}
 	} 
 ?>

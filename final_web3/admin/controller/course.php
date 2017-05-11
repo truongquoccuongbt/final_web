@@ -7,7 +7,8 @@
 		}
 
 		public static function InsertCourse($idCourse, $nameCourse) {
-			CourseModel::InsertCourse($idCourse, $nameCourse);
+			$check = CourseModel::InsertCourse($idCourse, $nameCourse);
+			return $check;
 		}
 	} 
 ?>

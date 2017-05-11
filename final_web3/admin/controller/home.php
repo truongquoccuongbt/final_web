@@ -205,6 +205,7 @@
 			self::AddLesson();
 			self::AddQuesChoi();
 			self::AddQuesWri();
+			self::AddCourse();
 			self::DisplayCourseOnTableChapter();
 			self::DisplayChapterOnTableLesson();
 			self::DisplayLessonOnTableQues();
@@ -249,22 +250,67 @@
 		}
 
 		private function TableCourse() {
+			if (isset($_GET['checkIdCourse'], $_GET['checkNameCourse'])) {
+				if ($_GET['checkIdCourse'] == 0) {
+					$textId = "Only use characters a-z or number";
+				}
+				else if ($_GET['checkIdCourse'] == -1){
+					$textId = "Length exceeds 5";
+				}
+				else {
+					$textId = "";
+				}
+
+				if ($_GET['checkNameCourse'] == 0) {
+					$textName = "Only use characters a-z or number";
+				}
+				else {
+					$textName = "";
+				}
+			}
+
 			echo "
 				<table class='table table-hover'>
 					<thead><th>Course</th></thead>
 					<tr>
 						<td>id_course</td>
 						<td><input type='txt' readonly id='idCourse' name='idCourse'></td>
+						<td name='noticeIdCourse' style='color:red;' id='noticeIdCourse'></td>
 					</tr>
 					<tr>
 						<td>name_course</td>
 						<td><input type='txt' id='nameCourse' name='nameCourse'></td>
+						<td name='noticeNameCourse' style='color:red;' id='noticeNameCourse'></td>
 					</tr>
 					<tr>
-						<td><button type='button' class='btn btn-primary' id='addCourse'>Add</button> <button type='submit' class='btn btn-success' name='saveCourse'>Save</button></td>
+						<td><button type='button' class='btn btn-primary' id='addCourse' onclick='AddCourse()'>Add</button> <button type='submit' class='btn btn-success' name='saveCourse'>Save</button></td>
 					</tr>
 				</table>
 			";
+
+			if (isset($_GET['checkIdCourse'],$_GET['checkNameCourse'])) {
+				if ($_GET['checkIdCourse'] == 1) {
+					echo "
+						<script>
+							document.getElementById('idCourse').value = '{$_SESSION['tmpIdCourse']}';
+						</script>
+					";
+				}
+				else if ($_GET['checkNameCourse'] == 1) {
+					echo "
+						<script>
+							document.getElementById('nameCourse').value = '{$_SESSION['tmpNameCourse']}';
+							document.getElementById('idCourse').readOnly = false;
+						</script>
+					";
+				}
+				echo "
+					<script>
+						document.getElementById('noticeIdCourse').textContent = '{$textId}';
+						document.getElementById('noticeNameCourse').textContent = '{$textName}';
+					</script>
+				";
+			}
 		}
 
 		private function TableChapter() {
@@ -332,20 +378,18 @@
 					<tr>
 						<td>choise 1</td>
 						<td><input type='txt' id='choice1' name='choice1'></td>
-						<td><input type='txt' id='pic1' name='pic1'></td>
-						<td><button type='submit' class='btn btn-info'>Image Link</button></td>
+						<td colspan='2'><input type='file' name='pic1'></td>
 					</tr>
 					<tr>
 						<td>choise 2</td>
 						<td><input type='txt' id='choice2' name='choice2'></td>
-						<td><input type='txt' id='pic2' name='pic2'></td>
-						<td><button type='submit' class='btn btn-info'>Image Link</button></td>
+						<td colspan='2'><input type='file' name='pic2'></td>
+					
 					</tr>
 					<tr>
 						<td>choise 3</td>
 						<td><input type='txt' id='choice3' name='choice3'></td>
-						<td><input type='txt' id='pic3' name='pic3'></td>
-						<td><button type='submit' class='btn btn-info'>Image Link</button></td>
+						<td colspan='2'><input type='file' name='pic3'></td>
 					</tr>
 					<tr>
 						<td>answer</td>
@@ -393,6 +437,7 @@
 						document.getElementById('selectChapter').disabled = true;
 						document.getElementById('selectLessonChoi').disabled = true;
 						document.getElementById('selectLessonWri').disabled = true;
+						document.getElementById('idCourse').readOnly = true;
 						var count = 0;
 						var idCourse = document.getElementById('course').value;
 						var select = document.getElementById('chapter');
@@ -429,6 +474,7 @@
 						document.getElementById('selectChapter').disabled = true;
 						document.getElementById('selectLessonChoi').disabled = true;
 						document.getElementById('selectLessonWri').disabled = true;
+						document.getElementById('idCourse').readOnly = true;
 						var count = 0;
 						var idChapter = document.getElementById('chapter').value;
 						var select = document.getElementById('lesson');
@@ -462,6 +508,7 @@
 						document.getElementById('selectChapter').disabled = true;
 						document.getElementById('selectLessonChoi').disabled = true;
 						document.getElementById('selectLessonWri').disabled = true;
+						document.getElementById('idCourse').readOnly = true;
 						var count = 0;
 						var idLesson = document.getElementById('lesson').value;
 						var select = document.getElementById('question');
@@ -589,6 +636,7 @@
 						document.getElementById('selectChapter').disabled = true;
 						document.getElementById('selectLessonChoi').disabled = true;
 						document.getElementById('selectLessonWri').disabled = true;
+						document.getElementById('idCourse').readOnly = true;
 
 						var idQuesWri = document.getElementById('idQuesWri');
 						var contentQuesWri = document.getElementById('contentQuesWri');
@@ -613,6 +661,7 @@
 						document.getElementById('selectChapter').disabled = true;
 						document.getElementById('selectLessonChoi').disabled = true;
 						document.getElementById('selectLessonWri').disabled = true;
+						document.getElementById('idCourse').readOnly = true;
 
 						var idQuesChoi = document.getElementById('idQuesChoi');
 						var contentQuesChoi = document.getElementById('contentQuesChoi');
@@ -631,9 +680,7 @@
 								choice1.value = listQuesChoi[i]['choice_1'];
 								choice2.value = listQuesChoi[i]['choice_2'];
 								choice3.value = listQuesChoi[i]['choice_3'];
-								pic1.value = listQuesChoi[i]['picture_1'];
-								pic2.value = listQuesChoi[i]['picture_2'];
-								pic3.value = listQuesChoi[i]['picture_3'];
+								
 								ansChoi.value = listQuesChoi[i]['answer'];
 							}
 						}
@@ -684,10 +731,6 @@
 						document.getElementById('choice1').value = '';
 						document.getElementById('choice2').value = '';
 						document.getElementById('choice3').value = '';
-
-						document.getElementById('pic1').value = '';
-						document.getElementById('pic2').value = '';
-						document.getElementById('pic3').value = '';
 
 						document.getElementById('ansChoi').value = '';
 					}
@@ -811,6 +854,17 @@
 			";
 		}
 
+		private function AddCourse() {
+			echo "
+				<script>
+					function AddCourse() {
+						document.getElementById('idCourse').readOnly = false;
+						ClearTableCourse();
+					}
+				</script>
+			";
+		}
+
 		private function DisplayCourseOnTableChapter() {
 			echo "
 				<script>
@@ -860,6 +914,53 @@
 					}
 				</script>
 			";
+		}
+
+		public function SaveCourse() {
+			$idCourse = $_GET['idCourse'];
+			$nameCourse = $_GET['nameCourse'];
+
+			if (strlen($idCourse) > 5) {
+				$checkIdCourse = -1;
+			}
+			else if (!self::CheckInput($idCourse)) {
+				$checkIdCourse = 0;
+			}
+			else {
+				$checkIdCourse = 1;
+			}
+
+			self::CheckInput($nameCourse) ? $checkNameCourse = 1 : $checkNameCourse = 0;
+			if ($checkIdCourse == 1 && $checkNameCourse == 1) {
+				echo $check;
+				$check = Course::InsertCourse($idCourse, $nameCourse);
+				if ($check == false) {
+					echo "
+						<script>
+							alert('Add fail!!!Id course is duplicate');
+							window.location = 'home.php?controller=home&action=ManagerCourse';
+						</script>
+
+					";
+				}
+				else {
+					echo "
+				 	<script>alert('Add success');
+				 	window.location = 'home.php?controller=home&action=ManagerCourse';
+				 	</script>
+					";
+				}
+			}
+			else {
+				$_SESSION['tmpIdCourse'] = $idCourse;
+				$_SESSION['tmpNameCourse'] = $nameCourse;
+				header("Location: home.php?controller=home&action=ManagerCourse&checkIdCourse={$checkIdCourse}&checkNameCourse={$checkNameCourse}");
+			}
+		}
+
+		private function CheckInput($input) {
+			$pattern = "/^[0-9a-zA-z]/";
+			return preg_match($pattern, $input) ? true : false;
 		}
 	} 
 ?>

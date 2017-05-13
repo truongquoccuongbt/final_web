@@ -25,8 +25,15 @@
 			$sql = "INSERT INTO `chapters`(`id_chapter`, `id_course`, `name_chapter`) VALUES ('$idChapter','$idCourse','$nameChapter');";
 			$stmt = $db->prepare($sql);
 			$stmt->execute();
+			if ($stmt->errorCode() == 23000) {
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$stmt->closeCursor();
+				return false;
+			}
+			
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$stmt->closeCursor();
+			return true;
 		}
 	} 
 ?>

@@ -7,7 +7,8 @@
 		}
 
 		public function InsertLesson($idLesson, $idChapter, $contentLesson) {
-			LessonModel::InsertLesson($idLesson, $idChapter, $contentLesson);
+			$check = LessonModel::InsertLesson($idLesson, $idChapter, $contentLesson);
+			return $check;
 		}
 	} 
 ?>

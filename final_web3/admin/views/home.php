@@ -28,15 +28,16 @@
 	if (isset($_GET['saveCourse'])) {
 	 	$action = "SaveCourse";
 	}
-	// else if (isset($_GET['saveChapter'])) {
-	// 	$action = "SaveChapter";
-	// }
-	// else if (isset($_GET['saveLesson'])) {
-	// 	$action = "SaveLesson";
-	// }
-	// else if (isset($_GET['saveQuesChoi'])) {
-	// 	$action = "SaveQuesChoi";
-	// }
+	else if (isset($_GET['saveChapter'])) {
+	 	$action = "SaveChapter";
+	}
+	else if (isset($_GET['saveLesson'])) {
+	 	$action = "SaveLesson";
+	}
+	else if (isset($_POST['saveQuesChoi'])) {
+	 	$action = "SaveQuesChoi";
+	 	var_dump($_FILES);	
+	}
 	// else {
 	// 	$action = "SaveQuesWri";
 	// }

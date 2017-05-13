@@ -171,8 +171,7 @@
 			echo "
 				</div>
 			</div>
-			<div id='edit-div' class='row rounded'>
-			<form>";
+			<div id='edit-div' class='row rounded'>";
 
 			self::TableCourse();
 			self::TableChapter();
@@ -181,7 +180,6 @@
 			self::TableQuestionWri();
 			
 			echo "
-				</form>
 				</div>
 			";
 
@@ -270,6 +268,7 @@
 			}
 
 			echo "
+				<form>
 				<table class='table table-hover'>
 					<thead><th>Course</th></thead>
 					<tr>
@@ -286,6 +285,7 @@
 						<td><button type='button' class='btn btn-primary' id='addCourse' onclick='AddCourse()'>Add</button> <button type='submit' class='btn btn-success' name='saveCourse'>Save</button></td>
 					</tr>
 				</table>
+				</form>
 			";
 
 			if (isset($_GET['checkIdCourse'],$_GET['checkNameCourse'])) {
@@ -314,7 +314,12 @@
 		}
 
 		private function TableChapter() {
+			$textName = "";
+			if (isset($_GET['checkNameChapter'])) {
+				$textName = "Only use a-z characters or number";
+			}
 			echo "
+				<form>
 				<table class='table table-hover'>
 					<thead><th>Chapter</th></thead>
 					<tr>
@@ -325,19 +330,34 @@
 						<td>id_course</td>
 						<td><select id='selectCourse' disabled='true' name='selectCourse'></select></td>
 					</tr>
-					<tr>
+					
+					<tr><tr>
 						<td>name_chapter</td>
 						<td><input type='txt' id='nameChapter' name='nameChapter'></td>
+						<td name='noticeNameChapter' style='color:red;' id='noticeNameChapter'></td>
 					</tr>
-					<tr>
 						<td><button type='button' class='btn btn-primary' id='addChapter' onclick='AddChapter()'>Add</button> <button type='submit' class='btn btn-success' name='saveChapter'>Save</button></td>
 					</tr>
 				</table>
+				</form>
 			";
+
+			if (isset($_GET['checkNameChapter'])) {
+				echo "
+					<script>
+						document.getElementById('noticeNameChapter').textContent = '{$textName}';
+					</script>
+				";
+			}
 		}
 
 		private function TableLesson() {
+			$textContent = "";
+			if (isset($_GET['checkContentLesson'])) {
+				$textContent = "Only use a-z characters or number";
+			}
 			echo "
+				<form>
 				<table class='table table-hover'>
 					<thead><th>Lesson</th></thead>
 					<tr>
@@ -351,55 +371,138 @@
 					<tr>
 						<td>content_question</td>
 						<td><input type='txt' id='contentLesson' name='contentLesson'></td>
+						<td name='noticeContentLesson' style='color:red;' id='noticeContentLesson'></td>
 					</tr>
 					<tr>
 						<td><button type='button' class='btn btn-primary' id='addLesson' onclick='AddLesson()'>Add</button> <button type='submit' class='btn btn-success' name='saveLesson'>Save</button></td>
 					</tr>
 				</table>
+				</form>
 			";
+			if (isset($_GET['checkContentLesson'])) {
+				echo "
+					<script>
+						document.getElementById('noticeContentLesson').textContent = '{$textContent}';
+					</script>
+				";
+			}
 		}
 
 		private function TableQuestionChoi() {
+			if (isset($_GET['checkContentQuesChoi'],$_GET['checkChoice_1'],$_GET['checkChoice_2'],$_GET['checkChoice_3'], $_GET['checkPic1'], $_GET['checkPic2'], $_GET['checkPic3'])) {
+				$_GET['checkContentQuesChoi'] == 1 ? $textContentQuesChoi = "" : $textContentQuesChoi = "Only use a-z characters or number";
+				$_GET['checkChoice_1'] == 1 ? $textChoice1 = "" : $textChoice1 = "Only use a-z characters or number";
+				$_GET['checkChoice_2'] == 1 ? $textChoice2 = "" : $textChoice2 = "Only use a-z characters or number";
+				$_GET['checkChoice_3'] == 1 ? $textChoice3 = "" : $textChoice3 = "Only use a-z characters or number";
+				$_GET['checkPic1'] == 1 ? $textPic1 = "" : $textPic1 = "Only use .JPEG, .PNG, .JPG";
+				$_GET['checkPic2'] == 1 ? $textPic2 = "" : $textPic2 = "Only use .JPEG, .PNG, .JPG";
+				$_GET['checkPic3'] == 1 ? $textPic3 = "" : $textPic3 = "Only use .JPEG, .PNG, .JPG";
+			}
 			echo "
+				<form method='post' action='home.php' enctype='multipar/form-data'>
 				<table class='table table-hover'>
-					<thead><th>Question_Choices</th></thead>
+					<thead><th style='width: 30%'>Question_Choices</th>
+						   <th style='width: 20%'></th>
+						   <th style='width: 10%'></th>
+						   <th style='width: 40%'></th>
+					</thead>
 					<tr>
 						<td>id</td>
 						<td><input type='txt' readonly id='idQuesChoi' name='idQuesChoi'></td>
+						<td></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>id_lesson</td>
-						<td><select id='selectLessonChoi' disabled='true' name='selectLessonChoi'></select></td>
+						<td>
+							<select id='selectLessonChoi' disabled='true' name='selectLessonChoi'></select>
+						</td>
+						<td></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>content_question</td>
-						<td><input type='txt' id='contentQuesChoi' name='contentQuesChoi'></td>
+						<td>
+							<span id='noticeContentQuesChoi' style='color:red;'></span>
+							<input type='txt' id='contentQuesChoi' name='contentQuesChoi'>
+						</td>
+						<td></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>choise 1</td>
-						<td><input type='txt' id='choice1' name='choice1'></td>
-						<td colspan='2'><input type='file' name='pic1'></td>
+						<td>
+							<span id='noticeChoice1' style='color:red;'></span>
+							<input type='txt' id='choice1' name='choice1'>
+						</td>
+						<td colspan='2'>
+							<span id='noticePic1' style='color:red;'></span>
+							<input type='file' name='pic1'/>
+						</td>
 					</tr>
 					<tr>
 						<td>choise 2</td>
-						<td><input type='txt' id='choice2' name='choice2'></td>
-						<td colspan='2'><input type='file' name='pic2'></td>
-					
+						<td>
+							<span id='noticeChoice2' style='color:red;'></span>
+							<input type='txt' id='choice2' name='choice2'>
+						</td>
+						<td colspan='2'>
+							<span id='noticePic3' style='color:red;'></span>
+							<input type='file' name='pic2'/>
+						</td>
 					</tr>
 					<tr>
 						<td>choise 3</td>
-						<td><input type='txt' id='choice3' name='choice3'></td>
-						<td colspan='2'><input type='file' name='pic3'></td>
+						<td>
+							<span id='noticeChoice3' style='color:red;'></span>
+							<input type='txt' id='choice3' name='choice3'>
+						</td>
+						<td colspan='2'>
+							<span id='noticePic3' style='color:red;'></span>
+							<input type='file' name='pic3'/>
+						</td>
 					</tr>
 					<tr>
 						<td>answer</td>
-						<td><input type='txt' id='ansChoi' name='ansChoi'></td>
+						<td><select id='selectAns' name='selectAns'>
+								<option value='1'>1</option>
+								<option value='2'>2</option>
+								<option value='3'>3</option>
+							</select>
+						</td>
+						<td></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td><button type='button' class='btn btn-primary' id='addQuesChoi' onclick='AddQuesChoi()'>Add</button> <button type='submit' class='btn btn-success' name='saveQuesChoi'>Save</button></td>
 					</tr>
 				</table>
+				</form>
 			";
+
+			if (isset($_GET['checkContentQuesChoi'],$_GET['checkChoice_1'],$_GET['checkChoice_2'],$_GET['checkChoice_3'], $_GET['checkPic1'], $_GET['checkPic2'], $_GET['checkPic3'])) {
+					if (!$_GET['checkContentQuesChoi']) {
+						echo "<script>document.getElementById('noticeContentQuesChoi').innerHTML = '{$textContentQuesChoi}'</script>";
+					}
+					if (!$_GET['checkChoice_1']) {
+						echo "<script>document.getElementById('noticeChoice1').innerHTML = '{$textChoice1}'</script>";
+					}
+					if (!$_GET['checkChoice_2']) {
+						echo "<script>document.getElementById('noticeChoice2').innerHTML = '{$textChoice2}'</script>";
+					}
+					if (!$_GET['checkChoice_3']) {
+						echo "<script>document.getElementById('noticeChoice3').innerHTML = '{'$textChoice3}'</script>";
+					}
+					if (!$_GET['checkPic1']) {
+						echo "<script>document.getElementById('noticePic1').innerHTML = '{$textPic1}'</script>";
+					}
+					if (!$_GET['checkPic2']) {
+						echo "<script>document.getElementById('noticePic2').innerHTML = '{$textPic2}'</script>";
+					}
+					if (!$_GET['checkPic3']) {
+						echo "<script>document.getElementById('noticePic3').innerHTML = '{$textPic3}'</script>";
+					}
+			}
 		}
 
 		private function TableQuestionWri() {
@@ -731,8 +834,6 @@
 						document.getElementById('choice1').value = '';
 						document.getElementById('choice2').value = '';
 						document.getElementById('choice3').value = '';
-
-						document.getElementById('ansChoi').value = '';
 					}
 				</script>
 			";
@@ -932,7 +1033,6 @@
 
 			self::CheckInput($nameCourse) ? $checkNameCourse = 1 : $checkNameCourse = 0;
 			if ($checkIdCourse == 1 && $checkNameCourse == 1) {
-				echo $check;
 				$check = Course::InsertCourse($idCourse, $nameCourse);
 				if ($check == false) {
 					echo "
@@ -961,6 +1061,151 @@
 		private function CheckInput($input) {
 			$pattern = "/^[0-9a-zA-z]/";
 			return preg_match($pattern, $input) ? true : false;
+		}
+
+		public function SaveChapter() {
+			$idChapter = $_GET['idChapter'];
+			$idCourse = $_GET['selectCourse'];
+			$nameChapter = $_GET['nameChapter'];
+
+			self::CheckInput($nameChapter) ? $checkNameChapter = 1 : $checkNameChapter = 0;
+			if ($checkNameChapter == 1) {
+				$checkInsert = Chapter::InsertChapter($idChapter, $idCourse, $nameChapter);
+				if ($checkInsert) {
+					echo "
+				 	<script>alert('Add success');
+				 	window.location = 'home.php?controller=home&action=ManagerCourse';
+				 	</script>
+					";
+				}
+				else {
+					echo "
+						<script>
+							alert('Add fail!!!Id chapter is duplicate');
+							window.location = 'home.php?controller=home&action=ManagerCourse';
+						</script>
+					";
+				}
+			}
+			else {
+				$_SESSION['tmpIdChapter'] = $idChapter;
+				$_SESSION['tmpCourse'] = $idCourse;
+				$_SESSION['tmpNameChapter'] = $nameChapter;
+
+				header("Location: home.php?controller=home&action=ManagerCourse&checkNameChapter={$checkNameChapter}");
+			}
+		}
+
+		public function SaveLesson() {
+			$idLesson = $_GET['idLesson'];
+			$idChapter = $_GET['selectChapter'];
+			$contentLesson = $_GET['contentLesson'];
+
+			self::CheckInput($contentLesson) ? $checkContentLesson = 1 : $checkContentLesson = 0;
+			if ($checkContentLesson == 1) {
+				$checkInsert = Lesson::InsertLesson($idLesson, $idChapter, $contentLesson);
+				if ($checkInsert) {
+					echo "
+				 	<script>alert('Add success');
+				 	window.location = 'home.php?controller=home&action=ManagerCourse';
+				 	</script>
+					";
+				}
+				else {
+					echo "
+						<script>
+							alert('Add fail!!!Id lesson is duplicate');
+							window.location = 'home.php?controller=home&action=ManagerCourse';
+						</script>
+					";
+				}
+			}
+			else {
+				$_SESSION['tmpIdLesson'] = $idLesson;
+				$_SESSION['tmpIdChapter'] = $idChapter;
+				$_SESSION['tmpContentLesson'] = $contentLesson;
+
+				header("Location: home.php?controller=home&action=ManagerCourse&checkContentLesson={$checkContentLesson}");
+			}
+		}
+
+		public function SaveQuesChoi() {
+			$idQuesChoi = $_POST['idQuesChoi'];
+			$idLesson = $_POST['selectLessonChoi'];
+			$contentQuesChoi = $_POST['contentQuesChoi'];
+			$choice_1 = $_POST['choice1'];
+			$choice_2 = $_POST['choice2'];
+			$choice_3 = $_POST['choice3'];
+			$answer = $_POST['selectAns'];
+	
+			if (isset($_FILES['pic1'])) {	
+				
+				$pic1 = $_FILES['pic1']['name'];
+				$pic2 = $_FILES['pic2']['name'];
+				$pic3 = $_FILES['pic3']['name'];
+				print_r($pic1);
+				$_SESSION['tmpPath1'] = $_FILES['pic1']['tmp_name'];
+				$_SESSION['tmpPath2'] = $_FILES['pic2']['tmp_name'];
+				$_SESSION['tmpPath3'] = $_FILES['pic3']['tmp_name'];
+
+				$link1 = "../image/".$pic1;
+				$link2 = "../image/".$pic2;
+				$link3 = "../image/".$pic3;
+
+				echo $link1;
+				self::CheckExtendOfPic($pic1) ? $checkPic1 = 1 : $checkPic1 = 0;
+				self::CheckExtendOfPic($pic2) ? $checkPic2 = 1 : $checkPic2 = 0;
+				self::CheckExtendOfPic($pic3) ? $checkPic3 = 1 : $checkPic3 = 0;
+
+				self::CheckInput($contentQuesChoi) ? $checkContentQuesChoi = 1 : $checkContentQuesChoi = 0;
+				self::CheckInput($choice_1) ? $checkChoice_1 = 1 : $checkChoice_1 = 0;
+				self::CheckInput($choice_2) ? $checkChoice_2 = 1 : $checkChoice_2 = 0;
+				self::CheckInput($choice_3) ? $checkChoice_3 = 1 : $checkChoice_3 = 0;
+
+				if ($checkContentQuesChoi  && $checkChoice_1 && $checkChoice_2 && $checkChoice_3 && $checkPic1 && $checkPic2 && $checkPic3) {
+					$checkInsert = QuestionChoice::InsertQuesChoi($idQuesChoi, $idLesson, $contentQuesChoi, $choice_1, $choice_2, $choice_3, $link1, $link2, $link3, $answer);
+					if ($checkInsert) {
+						// echo "
+					 // 	<script>alert('Add success');
+					 // 	window.location = 'home.php?controller=home&action=ManagerCourse';
+					 // 	</script>
+						// ";
+					}
+					else {
+						// echo "
+						// 	<script>
+						// 		alert('Add fail!!!Id question choice is duplicate');
+						// 		window.location = 'home.php?controller=home&action=ManagerCourse';
+						// 	</script>
+						// ";
+					}
+				}
+				else {
+					$_SESSION['tmpIdQuesChoi'] = $idQuesChoi;
+					$_SESSION['tmpIdLesson'] = $idLesson;
+					$_SESSION['tmpContentQuesChoi'] = $contentQuesChoi;
+					$_SESSION['tmpChoice1'] = $choice_1;
+					$_SESSION['tmpChoice2'] = $choice_2;
+					$_SESSION['tmpChoice3'] = $choice_3;
+					$_SESSION['tmpLink1'] = $link1;
+					$_SESSION['tmpLink2'] = $link2;
+					$_SESSION['tmpLink3'] = $link3;
+					$_SESSION['tmpAns'] = $answer;
+
+					// header("Location: home.php?controller=home&action=ManagerCourse&checkIdQues={$checkIdQues}&checkLesson={$checkLesson}&checkContentQuesChoi={$checkContentQuesChoi}&checkChoice_1={$checkChoice_1}&checkChoice_2={$checkChoice_2}&checkChoice_3={$checkChoice_3}&checkPic1={$checkPic1}&checkPic2={$checkPic2}&checkPic3={$checkPic3}");
+				}
+			}
+		}
+
+		private function CheckExtendOfPic($picName) {
+			$allowed = array("jpeg","jpg","png");
+			$extend = pathinfo($picName, PATHINFO_EXTENSION);
+			echo $extend;
+
+			if (in_array($extend,$allowed)) {
+				return true;
+			}
+			return false;
 		}
 	} 
 ?>

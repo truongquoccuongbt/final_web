@@ -12,7 +12,8 @@
 		}
 
 		public function InsertChapter($idChapter, $idCourse, $nameChapter) {
-			ChapterModel::InsertChapter($idChapter, $idCourse, $nameChapter);
+			$check = ChapterModel::InsertChapter($idChapter, $idCourse, $nameChapter);
+			return $check;
 		}
 	} 
 ?>

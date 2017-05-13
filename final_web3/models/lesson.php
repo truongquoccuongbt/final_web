@@ -25,8 +25,14 @@
 			$sql = "INSERT INTO `lessons`(`id_lesson`, `id_chapter`, `content_lesson`) VALUES ('$idLesson','$idChapter','$contentLesson')";
 			$stmt = $db->prepare($sql);
 			$stmt->execute();
+			if ($stmt->errorCode() == 23000) {
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$stmt->closeCursor();
+				return false;
+			}
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$stmt->closeCursor();
+			return true;
 		}
 	} 
 ?>

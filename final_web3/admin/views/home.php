@@ -36,11 +36,10 @@
 	}
 	else if (isset($_POST['saveQuesChoi'])) {
 	 	$action = "SaveQuesChoi";
-	 	var_dump($_FILES);	
 	}
-	// else {
-	// 	$action = "SaveQuesWri";
-	// }
+	else if (isset($_GET['saveQuesWri'])){
+		$action = "SaveQuesWri";
+	}
 
 
 	require_once 'home-gui.php';

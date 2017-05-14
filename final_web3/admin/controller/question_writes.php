@@ -7,7 +7,8 @@
 		}
 
 		public static function InsertQuesWri($idQuesWri, $idLesson, $contentQues, $answer) {
-			QuestionWriteModel::InsertQuesWri($idQuesWri, $idLesson, $contentQues, $answer);
+			$check = QuestionWriteModel::InsertQuesWri($idQuesWri, $idLesson, $contentQues, $answer);
+			return $check;
 		}
 	} 
 ?>

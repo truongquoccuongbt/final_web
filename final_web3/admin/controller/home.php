@@ -399,7 +399,7 @@
 				$_GET['checkPic3'] == 1 ? $textPic3 = "" : $textPic3 = "Only use .JPEG, .PNG, .JPG";
 			}
 			echo "
-				<form method='post' action='home.php' enctype='multipar/form-data'>
+				<form method='post' action='home.php' enctype='multipart/form-data'>
 				<table class='table table-hover'>
 					<thead><th style='width: 30%'>Question_Choices</th>
 						   <th style='width: 20%'></th>
@@ -506,7 +506,12 @@
 		}
 
 		private function TableQuestionWri() {
+			if (isset($_GET['checkContentQuesWri'], $_GET['checkAnsWri'])) {
+				$_GET['checkContentQuesWri'] == 1 ? $textContentQuesWri = "Only use a-z characters or number" : $textContentQuesWri;
+				$_GET['checkAnsWri'] == 1 ? $textAnsWri = "Only use a-z characters or number" : $textAnsWri = "";
+			}
 			echo "
+				<form>
 				<table class='table table-hover'>
 					<thead><th>Question_Write</th></thead>
 					<tr>
@@ -520,16 +525,27 @@
 					<tr>
 						<td>content_question</td>
 						<td><input type='txt' id='contentQuesWri' name='contentQuesWri'></td>
+						<td id='noticeContentQuesWri'></td>
 					</tr>
 					<tr>
 						<td>answer</td>
 						<td><input type='txt' id='ansWri' name='ansWri'></td>
+						<td id='noticeAnsWri'></td>
 					</tr>
 					<tr>
 						<td><button type='button' class='btn btn-primary' id='addQuesWri' onclick='AddQuesWri()'>Add</button> <button type='submit' class='btn btn-success' name='saveQuesWri'>Save</button></td>
 					</tr>
 				</table>
+				</form>
 			";
+			if (isset($_GET['checkContentQuesWri'], $_GET['checkAnsWri'])) {
+				echo "
+					<script>
+						document.getElementById('noticeContentQuesWri').textContent = '{$textContentQuesWri}';
+						document.getElementById('noticeAnsWri').textContent = '{$textAnsWri}';
+					</script>
+				";
+			}
 		}
 
 		private function GetChapterWithCourse() {
@@ -1059,8 +1075,8 @@
 		}
 
 		private function CheckInput($input) {
-			$pattern = "/^[0-9a-zA-z]/";
-			return preg_match($pattern, $input) ? true : false;
+			$pattern = "/^[$%&^<>?*@#]$/";
+			return preg_match($pattern, $input) ? false : true;
 		}
 
 		public function SaveChapter() {
@@ -1138,21 +1154,24 @@
 			$choice_3 = $_POST['choice3'];
 			$answer = $_POST['selectAns'];
 	
-			if (isset($_FILES['pic1'])) {	
+			if (isset($_FILES['pic1'],$_FILES['pic2'], $_FILES['pic3'])) {	
 				
 				$pic1 = $_FILES['pic1']['name'];
 				$pic2 = $_FILES['pic2']['name'];
 				$pic3 = $_FILES['pic3']['name'];
-				print_r($pic1);
+				
 				$_SESSION['tmpPath1'] = $_FILES['pic1']['tmp_name'];
 				$_SESSION['tmpPath2'] = $_FILES['pic2']['tmp_name'];
 				$_SESSION['tmpPath3'] = $_FILES['pic3']['tmp_name'];
 
-				$link1 = "../image/".$pic1;
-				$link2 = "../image/".$pic2;
-				$link3 = "../image/".$pic3;
+				$link1 = "../../public/image/".$pic1;
+				$link2 = "../../public/image/".$pic2;
+				$link3 = "../../public/image/".$pic3;
 
-				echo $link1;
+				$linkSql1 = "../public/image/".$pic1;
+				$linkSql2 = "../public/image/".$pic2;
+				$linkSql3 = "../public/image/".$pic3;
+
 				self::CheckExtendOfPic($pic1) ? $checkPic1 = 1 : $checkPic1 = 0;
 				self::CheckExtendOfPic($pic2) ? $checkPic2 = 1 : $checkPic2 = 0;
 				self::CheckExtendOfPic($pic3) ? $checkPic3 = 1 : $checkPic3 = 0;
@@ -1162,22 +1181,28 @@
 				self::CheckInput($choice_2) ? $checkChoice_2 = 1 : $checkChoice_2 = 0;
 				self::CheckInput($choice_3) ? $checkChoice_3 = 1 : $checkChoice_3 = 0;
 
+				echo $checkChoice_1;
 				if ($checkContentQuesChoi  && $checkChoice_1 && $checkChoice_2 && $checkChoice_3 && $checkPic1 && $checkPic2 && $checkPic3) {
-					$checkInsert = QuestionChoice::InsertQuesChoi($idQuesChoi, $idLesson, $contentQuesChoi, $choice_1, $choice_2, $choice_3, $link1, $link2, $link3, $answer);
+					$checkInsert = QuestionChoice::InsertQuesChoi($idQuesChoi, $idLesson, $contentQuesChoi, $choice_1, $choice_2, $choice_3, $linkSql1, $linkSql2, $linkSql3, $answer);
+
+					move_uploaded_file($_SESSION['tmpPath1'], $link1);
+					move_uploaded_file($_SESSION['tmpPath2'], $link2);
+					move_uploaded_file($_SESSION['tmpPath3'], $link3);
 					if ($checkInsert) {
-						// echo "
-					 // 	<script>alert('Add success');
-					 // 	window.location = 'home.php?controller=home&action=ManagerCourse';
-					 // 	</script>
-						// ";
+						echo "
+					  	<script>
+					  		alert('Add success');
+					  		window.location = 'home.php?controller=home&action=ManagerCourse';
+					  	</script>
+						";
 					}
 					else {
-						// echo "
-						// 	<script>
-						// 		alert('Add fail!!!Id question choice is duplicate');
-						// 		window.location = 'home.php?controller=home&action=ManagerCourse';
-						// 	</script>
-						// ";
+						echo "
+						 	<script>
+						 		alert('Add fail!!!Id question choice is duplicate');
+						 		window.location = 'home.php?controller=home&action=ManagerCourse';
+						 	</script>
+						";
 					}
 				}
 				else {
@@ -1192,7 +1217,7 @@
 					$_SESSION['tmpLink3'] = $link3;
 					$_SESSION['tmpAns'] = $answer;
 
-					// header("Location: home.php?controller=home&action=ManagerCourse&checkIdQues={$checkIdQues}&checkLesson={$checkLesson}&checkContentQuesChoi={$checkContentQuesChoi}&checkChoice_1={$checkChoice_1}&checkChoice_2={$checkChoice_2}&checkChoice_3={$checkChoice_3}&checkPic1={$checkPic1}&checkPic2={$checkPic2}&checkPic3={$checkPic3}");
+					header("Location: home.php?controller=home&action=ManagerCourse&checkIdQues={$checkIdQues}&checkLesson={$checkLesson}&checkContentQuesChoi={$checkContentQuesChoi}&checkChoice_1={$checkChoice_1}&checkChoice_2={$checkChoice_2}&checkChoice_3={$checkChoice_3}&checkPic1={$checkPic1}&checkPic2={$checkPic2}&checkPic3={$checkPic3}");
 				}
 			}
 		}
@@ -1200,12 +1225,49 @@
 		private function CheckExtendOfPic($picName) {
 			$allowed = array("jpeg","jpg","png");
 			$extend = pathinfo($picName, PATHINFO_EXTENSION);
-			echo $extend;
 
 			if (in_array($extend,$allowed)) {
 				return true;
 			}
 			return false;
+		}
+
+		public function SaveQuesWri() {
+			$idQuesWri = $_GET['idQuesWri'];
+			$idLesson = $_GET['selectLessonWri'];
+			$contentQuesWri = $_GET['contentQuesWri'];
+			$ansWri = $_GET['ansWri'];
+			
+			self::CheckInput($contentQuesWri) ? $checkContentQuesWri = 1 : $checkContentQuesWri = 0;
+			self::CheckInput($ansWri) ? $checkAnsWri = 1 : $checkAnsWri = 0;
+
+			if ($checkContentQuesWri && $checkAnsWri) {
+				$insertQuesWri = QuestionWrite::InsertQuesWri($idQuesWri, $idLesson, $contentQuesWri, $ansWri);
+				if ($insertQuesWri) {
+						echo "
+					  	<script>
+					  		alert('Add success');
+					  		window.location = 'home.php?controller=home&action=ManagerCourse';
+					  	</script>
+						";
+					}
+				else {
+					echo "
+					 	<script>
+					 		alert('Add fail!!!Id question write is duplicate');
+					 		window.location = 'home.php?controller=home&action=ManagerCourse';
+					 	</script>
+					";
+				}
+			}
+			else {
+				$_SESSION['tmpIdQuesWri'] = $idQuesWri;
+				$_SESSION['tmpIdLesson'] = $idLesson;
+				$_SESSION['tmpContentQues'] = $contentQuesWri;
+				$_SESSION['tmpAnsWri'] = $ansWri;
+
+				header("Location: home.php?controller=home&action=ManagerCourse&checkContentQuesWri={$checkContentQuesWri}&checkAnsWri={$checkAnsWri}");
+			}
 		}
 	} 
 ?>

@@ -37,36 +37,7 @@
 				<div class="login-form-main-message"></div>
 				<div class="main-login-form">
 					<div class="login-group">
-						<div class="form-group">
-							<label for="reg_username" class="sr-only">Username</label>
-							<input type="text" class="form-control" id="reg_username" name="reg_username" placeholder="username">
-						</div>
-						<div class="form-group">
-							<label for="reg_password" class="sr-only">Password</label>
-							<input type="password" class="form-control" id="reg_password" name="reg_password" placeholder="password">
-						</div>
-						<div class="form-group">
-							<label for="reg_password_confirm" class="sr-only">Password Confirm</label>
-							<input type="password" class="form-control" id="reg_password_confirm" name="reg_password_confirm" placeholder="confirm password">
-						</div>
-
-						<div class="form-group">
-							<label for="reg_email" class="sr-only">Email</label>
-							<input type="text" class="form-control" id="reg_email" name="reg_email" placeholder="email">
-						</div>
-						<div class="form-group">
-							<label for="reg_firstname" class="sr-only">First Name</label>
-							<input type="text" class="form-control" id="reg_firstname" name="reg_firstname" placeholder="first name">
-						</div>
-						<div class="form-group">
-							<label for="reg_lastname" class="sr-only">Last Name</label>
-							<input type="text" class="form-control" id="reg_lastname" name="reg_lastname" placeholder="last name">
-						</div>
-
-						<div class="form-group login-group-checkbox">
-							<input type="checkbox" class="" id="reg_agree" name="reg_agree">
-							<label for="reg_agree">i agree with <a href="term.php">terms</a></label>
-						</div>
+						<?php require_once 'routes.php'; ?>
 					</div>
 					<button type="submit" class="login-button" name="signUp" onclick="CheckInput()"><i class="fa fa-chevron-right"></i></button>
 				</div>
@@ -81,6 +52,5 @@
 			<p>[Đồ án môn Phát Triển Ứng Dụng Web - Website học tiếng Anh online]</p>
 			<p>[Trương Quốc Cường - 51403013 | Trần Trung Tín - 51403320]</p>
 	</section>
-	<?php require_once 'routes.php'; ?>;
 </body>
 </html>

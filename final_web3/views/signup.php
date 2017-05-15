@@ -11,6 +11,10 @@
 		$action = "View";
 	}
 
+	if (isset($_GET['signUp'])) {
+		$action = "SignUpUser";
+	}
+
 
 	require_once 'signup-gui.php'; 
 ?>

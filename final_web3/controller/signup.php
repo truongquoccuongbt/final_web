@@ -38,7 +38,7 @@
 			";
 		}
 
-		public function SignUp() {
+		public function SignUpUser() {
 			$idUser = $_GET['reg_username'];
 			$password = $_GET['reg_password'];
 			$confirm = $_GET['reg_password_confirm'];

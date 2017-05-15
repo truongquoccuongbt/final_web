@@ -32,19 +32,20 @@
 	<div class="text-center">
 		<div class="logo">register</div>
 		<!-- Main Form -->
-		<div class="login-form-1">
-			<form id="register-form" class="text-left">
-				<div class="login-form-main-message"></div>
-				<div class="main-login-form">
-					<div class="login-group">
-						<?php require_once 'routes.php'; ?>
-					</div>
-					<button type="submit" class="login-button" name="signUp" onclick="CheckInput()"><i class="fa fa-chevron-right"></i></button>
-				</div>
-				<div class="etc-login-form">
-					<p>already have an account? <a href="signin.php">login here</a></p>
-				</div>
-			</form>
+			<div class="login-form-1">
+				<form id="register-form" class="text-left">
+					<div class="login-form-main-message"></div>
+						<div class="main-login-form">
+							<div class="login-group">
+								<?php require_once 'routes.php'; ?>
+							</div>
+							<button type="submit" class="login-button" name="signUp"><i class="fa fa-chevron-right"></i></button>
+						</div>
+						<div class="etc-login-form">
+							<p>already have an account? <a href="signin.php">login here</a></p>
+						</div>
+				</form>
+			</div>
 		</div>
 		<!-- end:Main Form -->
 	</div>

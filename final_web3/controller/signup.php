@@ -163,10 +163,13 @@
 		}
 
 		private function SignInAfterSignUp($idUser, $password, $totalScore) {
+
 			$_SESSION['idUser'] = $idUser;
 			$_SESSION['password'] = $password;
 			$_SESSION['score'] = $totalScore;
 			$_SESSION['inforUser'] = array();
+			$inforUser = Progress::GetProgressOfUser($idUser);
+			array_push($_SESSION['inforUser'], $inforUser);
 
 			header("Location: index_learning.php");
 			exit();

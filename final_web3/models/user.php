@@ -43,5 +43,20 @@
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$stmt->closeCursor();
 		}
+
+		public static function UpdateTotalScore($idUser, $totalScore) {
+			$db = Database::connect();
+			$sql = "UPDATE `users` SET `total_score`= $totalScore WHERE id_user = '$idUser';";
+			$stmt = $db->prepare($sql);
+			$stmt->execute();
+			if ($stmt->errorCode() == 00000) {
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$stmt->closeCursor();
+				return true;
+			}
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+			return false;
+		}
 	} 
 ?>

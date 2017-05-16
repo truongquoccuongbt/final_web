@@ -19,7 +19,7 @@
 		 	if (sizeof($user) == 1) {
 		 		$inforUser = Progress::GetProgressOfUser($_SESSION['idUser']);
 				
-	
+				$_SESSION['totalScore'] = $user[0]['total_score'];
 		 		$_SESSION['inforUser'] = array();
 		 		array_push($_SESSION['inforUser'], $inforUser);
 		 		header("Location: index_learning.php");

@@ -5,6 +5,7 @@
 	include 'question_choices.php';
 	include 'question_writes.php';
 	include 'progress.php';
+	include 'user.php';
 
 	class Learning {
 		public function View() {
@@ -128,6 +129,12 @@
 						</tr>
 					";
 			}
+			echo "
+				<tr>
+					<td>Total Score:</td>
+					<td>{$_SESSION['totalScore']}</td>
+				</tr>
+			";
 		}
 
 		public function StartCourse () {
@@ -679,6 +686,12 @@
 			else {
 				Progress::InsertProgressOfUser($_SESSION['idUser'], $date, $point);
 			}
+			self::UpdateTotalScore($_SESSION['idUser'], $point);		
+		}
+
+		private function UpdateTotalScore($idUser, $point) {
+			$_SESSION['totalScore'] += $point;
+			User::UpdateTotalScore($idUser, $_SESSION['totalScore']); 
 		}
 
 		private function CheckExistProgressOfUser($inforUser, $idUser, $date) {

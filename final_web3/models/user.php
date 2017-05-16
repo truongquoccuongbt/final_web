@@ -25,8 +25,14 @@
 			$sql = "INSERT INTO `users`(`id_user`, `password`, `email`, `first_name`, `last_name`, `total_score`) VALUES ('$idUser','$password','$email','$firstName','$lastName',$totalScore)";
 			$stmt = $db->prepare($sql);
 			$stmt->execute();
+			if ($stmt->errorCode() == 23000) {
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$stmt->closeCursor();
+				return false;
+			}
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$stmt->closeCursor();
+			return true;
 		}
 
 		public static function DeleteUser($idUser) {

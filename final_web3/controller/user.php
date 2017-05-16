@@ -7,8 +7,8 @@
 		}
 
 		public function InsertUser($idUser, $password, $email, $firstName, $lastName, $totalScore) {
-			UserModel::InsertUser($idUser, $password, $email, $firstName, $lastName, $totalScore);
-			return true;
+				$check = UserModel::InsertUser($idUser, $password, $email, $firstName, $lastName, $totalScore);
+			return $check;
 		}
 	} 
 ?>

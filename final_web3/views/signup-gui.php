@@ -21,7 +21,7 @@
 
 <body>
 	<header>
-		<a href="index.php">
+		<a href="../index.php">
 			<img id="header-logo" src="../public/image/logo.PNG">
 		</a>
 		<nav class="site-nav">

@@ -111,6 +111,7 @@
 								<td> +{$_SESSION['score']}</td>
 								</tr>
 							";
+						$_SESSION['score'] = null;
 					}
 					else {
 						echo "

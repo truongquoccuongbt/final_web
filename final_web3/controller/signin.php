@@ -20,6 +20,7 @@
 		 		$inforUser = Progress::GetProgressOfUser($_SESSION['idUser']);
 				
 				$_SESSION['totalScore'] = $user[0]['total_score'];
+				echo $_SESSION['totalScore'];
 		 		$_SESSION['inforUser'] = array();
 		 		array_push($_SESSION['inforUser'], $inforUser);
 		 		header("Location: index_learning.php");

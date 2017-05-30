@@ -176,7 +176,7 @@
 		}
 
 		private function CheckInput($input) {
-			$pattern = "/[\\$\\&\\^\\<\\>\\?\\*\\#\\<\\>]/";
+			$pattern = "/[\\$\\&\\^\\<\\>\\?\\*\\#\\<\\>\\@\\%\\+\\=\\'\\-]/";
 			return preg_match($pattern, $input) ? false : true;
 		}
 

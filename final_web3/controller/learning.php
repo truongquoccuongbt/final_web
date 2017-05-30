@@ -20,34 +20,16 @@
 						<div class = 'row'>
 				";
 			foreach ($listCourse as $row) {
-				switch ($row['id_course']) {
-					case 'VN':
-						$idCourse = 'VN';
 						echo "
-								<div class='thumb-div rounded' style='background-image: url(../public/image/{$idCourse}-background.png)'>
+								<div class='thumb-div rounded' style='background-image: url(../public/image/ENG-background.jpg)'>
 									<a href='?controller=learning&action=StartCourse&idCourse=VN'>
-										<img class='thumb-inside-div rounded' src='../public/image/{$idCourse}-flag.png'>
+										<img class='thumb-inside-div rounded' src={$row['imageCourse']}>
 									</a>
 									<div id='text-inside-div' class='rounded'>
 										<h2 id='text-inside-h2'>{$row['name_course']}</h2>
 									</div>
 								</div>
-						";
-						break;
-					case 'ENG':
-						$idCourse = "ENG";
-						echo "
-								<div class='thumb-div rounded' style='background-image: url(../public/image/{$idCourse}-background.jpg)'>
-									<a href='?controller=learning&action=StartCourse&idCourse=ENG'>
-										<img class='thumb-inside-div rounded' src='../public/image/{$idCourse}-flag.jpg'>
-									</a>
-									<div id='text-inside-div' class='rounded'>
-										<h2 id='text-inside-h2'>{$row['name_course']}</h2>
-									</div>
-								</div>
-						";
-						break;
-					}
+						";		
 				}
 
 			echo "</div>

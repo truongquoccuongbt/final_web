@@ -1,3 +1,6 @@
+<?php
+	require_once 'loginFb.php'; 
+?>
 <!doctype html>
 <html>
 <head>
@@ -47,6 +50,11 @@
 						</div>
 					</div>
 					<button type="submit" class="login-button" name="login"><i class="fa fa-chevron-right"></i></button>
+				</div>
+				<div>
+					<?php
+						echo $output; 
+					?>
 				</div>
 				<div class="etc-login-form">
 					<p>new user? <a href="signup.php">create new account</a></p>

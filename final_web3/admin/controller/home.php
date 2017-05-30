@@ -5,6 +5,7 @@
 	include 'lesson.php';
 	include 'question_choices.php';
 	include 'question_writes.php';
+	include 'progress.php';
 
 	class Home {
 		public function SignOut() {
@@ -100,6 +101,7 @@
 
 		public function DeleteUser() {
 			$idUser = $_GET['removeUser'];
+			progress::DeleteProgress($idUser);
 			User::DeleteUser($idUser);
 			
 			header("Location: home.php?controller=home&action=ManagerUser");
@@ -280,6 +282,9 @@
 						<td>name_course</td>
 						<td><input type='txt' id='nameCourse' name='nameCourse'></td>
 						<td name='noticeNameCourse' style='color:red;' id='noticeNameCourse'></td>
+					</tr>
+					<tr>
+						<td><input type='file' id='pic_course'></td>
 					</tr>
 					<tr>
 						<td><button type='button' class='btn btn-primary' id='addCourse' onclick='AddCourse()'>Add</button> <button type='submit' class='btn btn-success' name='saveCourse'>Save</button></td>

@@ -1,9 +1,12 @@
 <?php
 	session_start();
 	require_once '../config/db.php';
+	require_once 'fbConfig.php';
+	require_once '../controller/user.php';
+	require_once '../controller/progress.php';
 
 	if (isset($_SESSION['idUser'])) {
-	  	header("Location: index_learning.php");
+	  	header("Location: http://localhost/final_web3/views/index_learning.php");
 	  	exit();
 	}
 

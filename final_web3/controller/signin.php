@@ -1,6 +1,4 @@
 <?php
-	include 'user.php';
-	include 'progress.php';
 	class SignIn {
 		public static function Login() {
 			if ($_POST['lg_username'] == "" || $_POST['lg_password'] == "") {
@@ -17,6 +15,9 @@
 			$user = User::GetUserByUserNameAndPass($_POST['lg_username'], $_POST['lg_password']);
 
 		 	if (sizeof($user) == 1) {
+
+		 		$_SESSION['firstName'] = $user[0]['first_name'];
+		 		$_SESSION['lastName'] = $user[0]['last_name'];
 		 		$inforUser = Progress::GetProgressOfUser($_SESSION['idUser']);
 				
 				$_SESSION['totalScore'] = $user[0]['total_score'];
@@ -45,6 +46,10 @@
 		public static function GetProgressOfUser () {
 		 	$infor = ProgressModel::GetProgressOfUser($_SESSION['idUser']);
 		 	return $infor;
+		}
+
+		public static function LoginWithFb() {
+			
 		}
 	} 
 ?>

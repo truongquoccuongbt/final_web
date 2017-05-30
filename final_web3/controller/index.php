@@ -1,15 +1,16 @@
 <?php
+	//include 'controller/user.php';
 	class Index {
 		public static function View () {
 		}
 
 		public static function Login() {
-			header("Location: views/signin.php");
+			header("Location: http://localhost/final_web3/views/signin.php");
 			exit();
 		}
 
 		public static function SignUp() {
-			header("Location: views/signup.php");
+			header("Location: http://localhost/final_web3/views/signup.php");
 			exit();
 		}
 	}

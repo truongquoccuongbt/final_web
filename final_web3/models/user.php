@@ -12,7 +12,7 @@
 
 		public static function GetUserByIdUserAndPassword($idUser,$password) {
 			$db = Database::connect();
-			$sql = "SELECT `id_user`,`password`,`total_score` FROM users WHERE id_user = '$idUser' AND password = '$password';";
+			$sql = "SELECT * FROM users WHERE id_user = '$idUser' AND password = '$password';";
 			$stmt = $db->prepare($sql);
 			$stmt->execute();
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);

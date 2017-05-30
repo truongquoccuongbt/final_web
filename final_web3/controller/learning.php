@@ -53,12 +53,15 @@
 			echo "</div>
 				  </div>
 				  </div>
-			";			
+			";
+			$name = $_SESSION['firstName'];
+			$name .= $_SESSION['lastName'];
+		 	$_SESSION['name'] = $name;
 			echo "
 			<div id='info1-right-div'>
 				<div id='info1-inside-right-div' class='rounded'>
 					<div class='rounded' id='info1-username-inside-right-div'>
-						<p id='text-username-inside-p'>Hi {$_SESSION['idUser']}</p>
+						<p id='text-username-inside-p'>Hi {$name}</p>
 					</div>
 					<div id='info1-course-inside-right-div'>
 						<p id='text-course-inside-p'>Current course :</p>
@@ -83,9 +86,11 @@
 		}
 
 		public function SignOut () {
-			$_SESSION['idUser'] = null;
+			$_SESSION = array();
+			unset($_SESSION['facebook_access_token']);
+			unset($_SESSION['userData']);
 			//session_destroy();
-			header("Location: signin.php");
+			header("Location: http://localhost/final_web3/");
 			exit();
 		}
 
@@ -212,7 +217,7 @@
 			<div id='info1-right-div'>
 				<div id='info1-inside-right-div' class='rounded'>
 					<div class='rounded' id='info1-username-inside-right-div'>
-						<p id='text-username-inside-p'>Hi {$_SESSION['idUser']}</p>
+						<p id='text-username-inside-p'>Hi {$_SESSION['name']}</p>
 					</div>
 					<div id='info1-course-inside-right-div'>
 						<p id='text-course-inside-p'>Current course {$idCourse}:</p>
@@ -279,7 +284,7 @@
 			<div id='info1-right-div'>
 				<div id='info1-inside-right-div' class='rounded'>
 					<div class='rounded' id='info1-username-inside-right-div'>
-						<p id='text-username-inside-p'>Hi {$_SESSION['idUser']}</p>
+						<p id='text-username-inside-p'>Hi {$_SESSION['name']}</p>
 					</div>
 					<div id='info1-course-inside-right-div'>
 						<p id='text-course-inside-p'>Current course {$idCourse}:</p>
